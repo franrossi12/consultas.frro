@@ -1,8 +1,8 @@
 @extends("layout.layout")
 
 @section("content")
-        <div class="row justify-content-center" style="margin: 4em">
-            <div class="col-md-6">
+        <div class="row justify-content-center" style="margin-top: 2em">
+            <div class="col-md-6 col-xs-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
 

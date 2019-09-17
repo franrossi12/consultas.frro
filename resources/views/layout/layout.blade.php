@@ -13,7 +13,7 @@
 <body>
 @include("layout.header")
 
-<div class="row">
+<div class="row" style="width: 100%">
     <div class="col-12">
         <div class="container">
 
