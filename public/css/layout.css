@@ -1,0 +1,35 @@
+#page-site-index #page-header, #page-login-index #page {
+    background-color: #f2f2f0 !important;
+    background-image: url(http://frro.cvg.utn.edu.ar/pluginfile.php/1/theme_snap/coverimage/1565009858/site-image.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: contain;
+    height: 100%;
+    overflow: hidden;
+}
+.footer-classic {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
+.context-dark, .bg-gray-dark, .bg-primary {
+    color: rgba(255, 255, 255, 0.8);
+}
+.footer-logo {
+    max-width: 250px;
+}
+
+.footer-classic a, .footer-classic a:focus, .footer-classic a:active {
+    color: #ffffff;
+}
+
+header {
+    position: fixed;
+    width: 100vw;
+    z-index: 23;
+    padding: .5em 4%;
+    background-color: rgba(255,255,255,.95);
+}

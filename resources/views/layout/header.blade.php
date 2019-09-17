@@ -1,30 +1,20 @@
-<header id="mr-nav" class="clearfix moodle-has-zindex">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand" href="#">
+    <img src="" alt="logo">
+</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
 
-    <div class="row">
-        <div class="col-5 col-md-3 col-lg-3 col-sm-3 desktop-logo">
-            <!-- LOGO -->
-            <a aria-label="home" id="snap-home" title="CVG - UTN - Facultad Regional Rosario" class="logo" href="http://frro.cvg.utn.edu.ar"><span class="sr-only">CVG - UTN - Facultad Regional Rosario</span></a>        </div>
-
-        <div class="col-2 col-md-4 col-lg-4 col-xl-6 col-sm-2 desktop-logo">
-            <!-- TITULO -->
-            <div class="title header_title text-center">Universidad Tecnológica Nacional</div>
+    @if (Auth::check())
+    @else
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li>
+                    <a href="{{ route('auth.login') }}"><button class="btn btn-primary btn-block">Log In</button></a>
+                </li>
+            </ul>
         </div>
+    @endif
 
-        <div class="col-md-3 desktop-logo">
-            <!-- OPCIONES -->
-            <div class="pull-right js-only nav-options">
-                <a aria-haspopup="true" class="btn btn-primary snap-login-button js-snap-pm-trigger" href="http://frro.cvg.utn.edu.ar/login/index.php">Log in</a><span class="hidden-md-down"></span>            </div>
-        </div>
-
-    </div>
-
-    <!-- MOBILE -->
-    <div class="mobile">
-        <div class="pull-right js-only">
-            <a aria-haspopup="true" class="btn btn-primary snap-login-button js-snap-pm-trigger" href="http://frro.cvg.utn.edu.ar/login/index.php">Log in</a><span class="hidden-md-down"></span>    </div>
-        <a aria-label="home" id="snap-home" title="CVG - UTN - Facultad Regional Rosario" class="logo mobile-logo" href="http://frro.cvg.utn.edu.ar"><span class="sr-only">CVG - UTN - Facultad Regional Rosario</span></a>
-
-    </div>
-
-
-</header>
+</nav>
