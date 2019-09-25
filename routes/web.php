@@ -22,3 +22,7 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('auth.register');
 })->name('auth.register');
+
+Route::get('newQuery', function () {
+    return view('queries.newQuery');
+})->name('queries.newQuery');
