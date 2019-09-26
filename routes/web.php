@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('login', function () {
     return view('auth.login');
@@ -23,6 +23,6 @@ Route::get('register', function () {
     return view('auth.register');
 })->name('auth.register');
 
-Route::get('newQuery', function () {
-    return view('queries.newQuery');
-})->name('queries.newQuery');
+Route::get('query', function () {
+    return view('queries.query');
+})->name('queries.query');

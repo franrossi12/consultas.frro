@@ -1,36 +1,55 @@
-#page-site-index #page-header, #page-login-index #page {
-    background-color: #f2f2f0 !important;
-    background-image: url(http://frro.cvg.utn.edu.ar/pluginfile.php/1/theme_snap/coverimage/1565009858/site-image.png);
-    background-repeat: no-repeat;
-    background-position: top right;
-    background-size: contain;
-    height: 100%;
-    overflow: hidden;
-}
-.footer-classic {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #efefef;
-    text-align: center;
-}
-.context-dark, .bg-gray-dark, .bg-primary {
-    color: rgba(255, 255, 255, 0.8);
-}
-.footer-logo {
-    max-width: 250px;
-}
+    html, body {
+        height: 100%;
+    }
 
-.footer-classic a, .footer-classic a:focus, .footer-classic a:active {
-    color: #ffffff;
-}
+    #page-site-index #page-header, #page-login-index #page {
+        background-color: #f2f2f0 !important;
+        background-image: url(http://frro.cvg.utn.edu.ar/pluginfile.php/1/theme_snap/coverimage/1565009858/site-image.png);
+        background-repeat: no-repeat;
+        background-position: top right;
+        background-size: contain;
+        height: 100%;
+        overflow: hidden;
+    }
 
-header {
-    position: fixed;
-    width: 100vw;
-    z-index: 23;
-    padding: .5em 4%;
-    background-color: rgba(255,255,255,.95);
-}
+    .footer-classic {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: #efefef;
+        text-align: center;
+    }
+
+    .context-dark, .bg-gray-dark, .bg-primary {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-logo {
+        max-width: 250px;
+    }
+
+    .footer-classic a, .footer-classic a:focus, .footer-classic a:active {
+        color: #ffffff;
+    }
+
+    .contenido {
+        display: block;
+        min-height: 600px;
+        position: relative;
+        width: 100%;
+    }
+
+    .campos {
+        margin-top: 5px;
+        font-size: 20px;
+    }
+
+    .submit {
+        width: 100%;
+    }
+
+    .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
+        background: #000000 !important
+    }
