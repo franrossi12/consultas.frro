@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -35,5 +37,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request) {
+        if (Auth::attempt($request->except(['_token'])) ) {
+            $redirect_after = redirectAfterLogin();
+            return redirect($redirect_after);
+        }
+        return Redirect::back()->withErrors(['Credenciales Incorrectas!']);
+    }
+
+    public function logout() {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+        return redirect('/');
     }
 }

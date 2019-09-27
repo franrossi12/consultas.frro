@@ -1,13 +1,13 @@
 @extends("layout.layout")
 
 @section("content")
-        <div class="row justify-content-center" style="margin-top: 2em">
+        <div class="row justify-content-center mt-3 mb-3">
             <div class="col-md-6 col-xs-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('auth.login') }}">
+                        <form method="POST" action="{{ route('auth.login-submit') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -38,15 +38,12 @@
                                 </div>
                             </div>
 
-{{--                            <div class="form-group row">--}}
-{{--                                <div class="col-md-6 offset-md-4">--}}
-{{--                                    <div class="checkbox">--}}
-{{--                                        <label>--}}
-{{--                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}--}}
-{{--                                        </label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                    <b>{{$errors->first()}}</b>
+                            </div>
+                            @endif
+
 
                             <div class="form-group row mb-4">
                                 <div class="col-md-12">

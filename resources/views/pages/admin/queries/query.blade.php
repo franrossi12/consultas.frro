@@ -1,14 +1,10 @@
 @extends("layout.layout")
+
+@section('sidebar')
+    @include("layout.admin.sidebar")
+@endsection
+
 @section("content")
-
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-</head>
-
-<body>
-
     <div class="card shadow-lg container-fluid contenido mt-3 mb-3">
         <div class="row">
             <div class="col-2 card-header m-3" style="height:100%">
@@ -21,6 +17,7 @@
             </div>
             <div class="col-9 card-body">
                 <div class="tab-content" id="v-pills-tabContent">
+
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         <!-- Inicio card 1-->
                         <div class="card shadow-lg mt-2 mb-2" style="width: 100%;">
@@ -515,14 +512,12 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script type="text/javascript">
+  <script type="text/javascript">
         $(".cardButton").click(function() {
             $(this).toggleClass("bg-light bg-dark");
             $(this).toggleClass("text-dark text-white");
             $(this).children("div").children("div").children("i").toggleClass("fa-angle-down fa-angle-up");
         });
     </script>
-</body>
+
 @endsection

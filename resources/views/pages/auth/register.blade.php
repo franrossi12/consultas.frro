@@ -1,7 +1,7 @@
 @extends("layout.layout")
 
 @section("content")
-    <div class="container" style="margin-top: 2em">
+    <div class="container mt-3 mb-3">
         <div class="row justify-content-center">
             <div class="col-md-8 col-sm-12 col-md-12">
                 <div class="card">
@@ -11,19 +11,6 @@
                         <form method="POST" action="{{ route('auth.register') }}">
                             @csrf
 
-                            <div class="form-group row">
-
-                                <div class="col-md-12">
-                                    <label for="name" class="col-form-label text-md-right">{{ __('Username') }}</label>
-                                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                    @if ($errors->has('name'))
-                                        <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="form-group row">
 
