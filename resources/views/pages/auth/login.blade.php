@@ -52,7 +52,7 @@
                                     </button>
                                     <br>
                                     <a href="{{ route('auth.register') }}">
-                                        <button type="submit" class="btn btn-secondary btn-block">
+                                        <button type="button" class="btn btn-secondary btn-block">
                                         {{ __('Registrarse') }}
                                     </button></a>
 
