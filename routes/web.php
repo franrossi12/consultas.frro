@@ -19,6 +19,8 @@ Route::post('login', 'Auth\LoginController@login')->name('auth.login-submit');
 Route::get('login', function () { return view('pages.auth.login');})->name('auth.login');
 Route::get('logout',  'Auth\LoginController@logout')->name('auth.logout');
 Route::get('register', function () { return view('pages.auth.register');})->name('auth.register');
+Route::post('register', 'Auth\RegisterController@create')->name('auth.register-submit');
+
 /* Route::post('login', 'Auth\RegisterController')->name('auth.register-submit'); */
 
 

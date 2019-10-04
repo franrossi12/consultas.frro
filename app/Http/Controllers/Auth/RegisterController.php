@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Mail\ConfirmarPasswordEmail;
+use App\Modelos\Perfil;
+use App\Modelos\Usuario;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -49,24 +54,58 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'nombre'                => ['required', 'max:255'],
+            'apellido'              => ['required', 'max:255'],
+            'email'                 => ['required', 'email', 'max:255', 'unique:usuarios'],
+            'password'              => ['required', 'min:8'],
+            'password_confirmation' => ['required', 'same:password'],
+        ], $this->messages());
+    }
+
+    protected function messages() {
+        return [
+            'nombre.required'                   => "El nombre es requerido.",
+            'nombre.max'                        => "El nombre debe tener menos de 255 caracteres.",
+            'apellido.required'                 => "El apellido es requerido.",
+            'apellido.max'                      => "El apellido debe tener menos de 255 caracteres.",
+            'email.required'                    => "El email es requerido.",
+            'email.max'                         => "El email debe tener menos de 255 caracteres.",
+            'email.email'                       => "El email no posee el formato correcto.",
+            'email.unique'                      => "El email ya se encuentra en el sistema.",
+            'password.required'                 => "La contraseña es requerida.",
+            'password.min'                      => "La contraseña debe contener al menos 8 caracteres.",
+            'password_confirmation.required'    => "La confirmación de la contraseña es requerida.",
+            'password_confirmation.same'        => "La confirmación de la contraseña debe coincidir con la contraseña.",
+        ];
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param Request $request
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $data = $request->all();
+        $validation = $this->validator($data);
+        $perfil_alumno = Perfil::where('tag', 'ALUMNO')->first();
+        if ($validation->fails())  {
+            return redirect()->back()->with(['errors'=>$validation->errors()]);
+        }
+        else{
+            $user = Usuario::create([
+                'nombre'            => $data['nombre'],
+                'apellido'          => $data['apellido'],
+                'email'             => $data['email'],
+                'password'          => Hash::make($data['password']),
+                'perfil_id'         => $perfil_alumno->id,
+                'token_verificar'   => Str::random(32)
+            ]);
+            Mail::to($data['email'])->send(new ConfirmarPasswordEmail($user));
+
+        }
+        return redirect('/register')->with(['message'=>'Debe verificar su mail. Se ha enviado a su casilla de correo el código de confirmación']);
+
     }
 }
