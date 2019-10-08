@@ -45,7 +45,7 @@ class VerificationController extends Controller
         } else {
             $user->email_verificado = date('Y-m-d H:i:s');
             $user->save();
-            return redirect('/login')->with(['message'=>'Email verificado correctamente.']);
+            return view('pages.auth.login')->with(['message'=>'Email verificado correctamente.']);
         }
     }
 }

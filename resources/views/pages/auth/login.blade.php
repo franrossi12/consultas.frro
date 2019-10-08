@@ -39,7 +39,7 @@
                             </div>
 
                             @if(isset($message))
-                                <div class="row">
+                                <div class="row p-3">
                                     <div class="col-12 alert alert-success">
                                         {{ $message }}
                                     </div>
@@ -48,7 +48,7 @@
 
 
                             @if($errors->any())
-                                <div class="row">
+                                <div class="row p-3">
                                     <div class="col-12 alert alert-danger">
                                         <b>{{$errors->first()}}</b>
                                     </div>
@@ -67,8 +67,8 @@
                                         {{ __('Registrarse') }}
                                     </button></a>
 
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Olvistaste tu Contraseña?') }}
+                                    <a class="btn btn-link" href="{{ route('auth.forgot') }}">
+                                        {{ __('Olvidaste tu Contraseña?') }}
                                     </a>
                                 </div>
                             </div>

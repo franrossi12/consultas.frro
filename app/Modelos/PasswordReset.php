@@ -9,6 +9,8 @@ class PasswordReset extends Model
 {
     use Notifiable;
 
+    protected $table = "password_resets";
+
     /**
      * The attributes that are mass assignable.
      *

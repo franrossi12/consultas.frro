@@ -44,7 +44,6 @@
             .p30-15-0 { padding: 30px 15px 0px 15px !important;
             .container { padding: 0px !important; }
             .fluid-img img { width: 100% !important; max-width: 100% !important; height: auto !important; }
-            .column,
         }
     </style>
 </head>

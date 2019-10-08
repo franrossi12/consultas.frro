@@ -72,7 +72,7 @@
 
                                 <div class="col-md-12">
                                     <label for="password_confirmation" class="col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
-                                    <input id="password_confirmation" type="password_confirmation" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
+                                    <input id="password_confirmation" type="password" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
 
                                     @if($errors->has('password_confirmation'))
                                         <span class="invalid-feedback">

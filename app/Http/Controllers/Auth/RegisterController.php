@@ -102,9 +102,8 @@ class RegisterController extends Controller
                 'token_verificar'   => Str::random(32)
             ]);
             Mail::to($data['email'])->send(new ConfirmarPasswordEmail($user));
-
         }
-        return redirect('/register')->with(['message'=>'Debe verificar su mail. Se ha enviado a su casilla de correo el código de confirmación']);
+        return view('pages.auth.login')->with(['message'=>'Debe verificar su mail. Se ha enviado a su casilla de correo el código de confirmación']);
 
     }
 }

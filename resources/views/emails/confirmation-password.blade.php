@@ -1,77 +1,37 @@
-@extends("layout.layout")
+@extends("emails.layout")
 
 @section("content")
-    <div class="container mt-3 mb-3">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-sm-12 col-md-12">
-                <div class="card">
-                    <div class="card-header">{{ __('Registro') }}</div>
+    <tr>
+            <td>
+                <div style="font-family:Helvetica,arial,sans-serif;font-size:30px;color:#333333;text-align:center;line-height:30px;letter-spacing:2px;padding:50px 0 20px 0">
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('auth.reset-submit') }}">
-                            @csrf
-                            @if(!empty($usuario))
-                                <input type="hidden" name="email" id="email" value="{{$usuario->email}}">
-                            @endif
-                            <div class="form-group row">
-
-                                <div class="col-md-12">
-                                    <label for="password" class="col-form-label text-md-right">{{ __('Contraseña') }}</label>
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                    @if($errors->has('password'))
-                                        <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-
-                                <div class="col-md-12">
-                                    <label for="password_confirmation" class="col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
-                                    <input id="password_confirmation" type="password_confirmation" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
-
-                                    @if($errors->has('password_confirmation'))
-                                        <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-
-
-                            @if(isset($message))
-                                <div class="row">
-                                    <div class="col-12 alert alert-success">
-                                        {{ $message }}
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if($errors->any())
-                                <div class="row">
-                                    <div class="col-12 alert alert-danger">
-                                        <b>{{$errors->first()}}</b>
-                                    </div>
-                                </div>
-                            @endif
-
-
-                            <div class="form-group row mb-4">
-                                <div class="col-md-12 ">
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        {{ __('Resetear Contraseña') }}
-                                    </button>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
+                    ¡Hola, {{$usuario->nombre}}!
                 </div>
-            </div>
-        </div>
-    </div>
+                <div style="font-family:Helvetica,arial,sans-serif;font-size:18px;color:#666666;text-align:center;line-height:24px;letter-spacing:2px;padding:5px 0 20px 0">
+
+                    tu registro está casi completo...
+                </div>
+                <div style="font-family:Helvetica,arial,sans-serif;font-size:16px;color:#666666;line-height:22px;padding:15px 10px 30px 10px">
+
+                    Para completar el registro debes validar tu dirección de email
+                    ingresando un código de activación:
+                </div>
+                <br>
+
+                <div style="margin:0 auto;text-align:center;padding:25px 0 45px 0">
+                    <a href={{ config('app.url') . '/confirmar-contraseña/' . $usuario->token_verificar }}
+                        style="background-color:#39B4EB;border-top-width:0px;border-right-width:0px;border-bottom-width:4px;border-left-width:0px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:#39B4EB;border-right-color:#39B4EB;border-bottom-color:#39B4EA;border-left-color:#39B4EB;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;color:#ffffff;display:inline-block;font-family:Arial,Helvetica,sans-serif;font-size:16px;text-transform:uppercase;font-weight:normal;height:50px;line-height:55px;text-align:center;text-decoration:none;width:200px"
+                       target="_blank">
+                        <strong>
+                            validar email
+                        </strong>
+                    </a>
+                    <br>
+                    <p>En caso de no visualizar el botón ingrese la siguiente url en su navegador:</p> <br>
+                    <b>{{ config('app.url') . '/confirmar-contraseña/' . $usuario->token_verificar }}</b>
+                </div>
+
+        </td>
+    </tr>
+
 @endsection

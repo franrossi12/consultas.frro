@@ -10,15 +10,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class OlvideContraseñaMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    protected $nombre;
+    protected $token;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($nombre, $token)
     {
-        //
+        $this->token = $token;
+        $this->nombre = $nombre;
     }
 
     /**
@@ -28,6 +30,6 @@ class OlvideContraseñaMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.forgot-password')->with(['token' => $this->token, 'nombre' => $this->nombre]);
     }
 }

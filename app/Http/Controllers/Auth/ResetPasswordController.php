@@ -72,7 +72,7 @@ class ResetPasswordController extends Controller
             $u = Usuario::where('email', $data["email"])->first();
             $u->password = bcrypt($data["password"]);
             $u->save();
-            return redirect('/login')->with(['message'=>'Contraseña actualizada correctamente.']);
+            return view('pages.auth.login')->with(['message'=>'Contraseña actualizada correctamente.']);
         }
     }
 }
