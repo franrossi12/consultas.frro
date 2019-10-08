@@ -42,6 +42,9 @@ class LoginController extends Controller
     public function login(Request $request) {
         if (Auth::attempt($request->except(['_token'])) ) {
             $redirect_after = redirectAfterLogin();
+            if (empty(currentUser()->email_verificado))
+                return Redirect::back()->withErrors(['Email no verificado.']);
+
             return redirect($redirect_after);
         }
         return Redirect::back()->withErrors(['Credenciales Incorrectas!']);

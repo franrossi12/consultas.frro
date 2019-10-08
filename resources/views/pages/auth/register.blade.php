@@ -18,7 +18,7 @@
                                     <label for="nombre" class="col-form-label text-md-right">{{ __('Nombre') }}</label>
                                     <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ old('nombre') }}" required autofocus>
 
-                                    @if ($errors->has('nombre'))
+                                    @if($errors->has('nombre'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('nombre') }}</strong>
                                     </span>
@@ -32,7 +32,7 @@
                                     <label for="apellido" class="col-form-label text-md-right">{{ __('Apellido') }}</label>
                                     <input id="apellido" type="text" class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" value="{{ old('apellido') }}" required autofocus>
 
-                                    @if ($errors->has('apellido'))
+                                    @if($errors->has('apellido'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('apellido') }}</strong>
                                     </span>
@@ -46,7 +46,7 @@
                                     <label for="email" class="col-form-label text-md-right">{{ __('E-Mail') }}</label>
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
-                                    @if ($errors->has('email'))
+                                    @if($errors->has('email'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
@@ -60,7 +60,7 @@
                                     <label for="password" class="col-form-label text-md-right">{{ __('Contraseña') }}</label>
                                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
-                                    @if ($errors->has('password'))
+                                    @if($errors->has('password'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
@@ -72,14 +72,17 @@
 
                                 <div class="col-md-12">
                                     <label for="password_confirmation" class="col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
-                                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
-                                    @if ($errors->has('password_confirmation'))
+                                    <input id="password_confirmation" type="password_confirmation" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
+
+                                    @if($errors->has('password_confirmation'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
+
+
 
                             @if(isset($message))
                             <div class="row">

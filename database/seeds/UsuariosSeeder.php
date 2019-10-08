@@ -22,6 +22,7 @@ class UsuariosSeeder extends Seeder
             $a = new Usuario([  'nombre'    => 'Admin',
                                 'email'     => 'admin@consultas.frro.com',
                                 'password'  => bcrypt('frro123'),
+                                'email_verificado'  => date('y-m-d H:i:s'),
                                 'perfil_id' => $admin_perfil->id
                             ]);
             $a->save();
@@ -32,6 +33,7 @@ class UsuariosSeeder extends Seeder
                                 'apellido'  => 'Test',
                                 'email'     => 'alumno@consultas.frro.com',
                                 'password'  => bcrypt('frro123'),
+                                'email_verificado'  => date('y-m-d H:i:s'),
                                 'perfil_id' => $alumno_perfil->id
                             ]);
             $a->save();
@@ -42,6 +44,7 @@ class UsuariosSeeder extends Seeder
                                 'apellido'  => 'Test',
                                 'email'     => 'profesor@consultas.frro.com',
                                 'password'  => bcrypt('frro123'),
+                                'email_verificado'  => date('y-m-d H:i:s'),
                                 'perfil_id' => $profesor_perfil->id
                             ]);
             $a->save();

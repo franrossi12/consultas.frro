@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Modelos\Usuario;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
@@ -34,8 +36,16 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    public function verify($token) {
+        $user = Usuario::where('token_verificar', $token)->first();
+        if (empty($user)) {
+            return redirect('/login')->withErrors(['El token a verificar no es válido.']);
+        } else {
+            $user->email_verificado = date('Y-m-d H:i:s');
+            $user->save();
+            return redirect('/login')->with(['message'=>'Email verificado correctamente.']);
+        }
     }
 }

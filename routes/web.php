@@ -11,17 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', function () {return view('welcome');})->name('welcome');
 
+// login
 Route::post('login', 'Auth\LoginController@login')->name('auth.login-submit');
 Route::get('login', function () { return view('pages.auth.login');})->name('auth.login');
+// logout
 Route::get('logout',  'Auth\LoginController@logout')->name('auth.logout');
+// register
 Route::get('register', function () { return view('pages.auth.register');})->name('auth.register');
 Route::post('register', 'Auth\RegisterController@create')->name('auth.register-submit');
-
-/* Route::post('login', 'Auth\RegisterController')->name('auth.register-submit'); */
+// confirm - reset password
+Route::post('confirmar-contraseña/{token}', 'Auth\VerificationController@verify')->name('auth.confirmar');
+Route::get('olvide-contraseña',  function () { return view('pages.auth.forgot');})->name('auth.forgot');
+Route::post('olvide-contraseña',  'Auth\ForgotPasswordController@send')->name('auth.forgot-submit');
+Route::get('olvide-contraseña/{token}',  'Auth\ForgotPasswordController@form');
+Route::post('resetear-contraseña',  'Auth\ResetPasswordController@resetPassword')->name('auth.reset-submit');
 
 
 /* RUTAS ADMIN */

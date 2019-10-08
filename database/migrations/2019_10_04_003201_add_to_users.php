@@ -14,7 +14,7 @@ class AddToUsers extends Migration
     public function up()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->string('token_verificar');
+            $table->string('token_verificar')->nullable();
         });
     }
 
