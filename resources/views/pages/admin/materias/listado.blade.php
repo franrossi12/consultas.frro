@@ -31,6 +31,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $materias->links() }}
             </div>
         </div>
     </div>
