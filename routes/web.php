@@ -43,9 +43,7 @@ Route::prefix('admin')->group(function () {
         return view('pages.admin.materias.listado');
     })->name('admin.materias');
 
-    Route::get('consultas', function () {
-        return view('pages.admin.consultas.listado');
-    })->name('admin.consultas');
+    Route::get('consultas', 'ConsultaController@index')->name('admin.consultas');
 
 
     Route::get('eventos', function () {

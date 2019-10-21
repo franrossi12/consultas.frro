@@ -15,4 +15,12 @@ class Consulta extends Model
         'numero_dia',
         'hora'
     ];
+
+    public function materia() {
+      return $this->belongsTo(Materia::class, 'materia_id');
+    }
+
+        public function profesor() {
+          return $this->belongsTo(Usuario::class, 'profesor_id');
+        }
 }

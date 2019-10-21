@@ -5,7 +5,6 @@
 @endsection
 
 @section("content")
-
 <div class="row mt-3">
         <div class="col-md-8 col-xs-12 col-sm-12">
             <h2>Listado de Consultas</h2>
@@ -20,31 +19,20 @@
                     <th scope="col">Dia</th>
                     <th scope="col">Hora</th>
                 </tr>
-                </thead>
+              </thead>
+                @foreach($consultas as $consulta)
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Comunicaciones</td>
-                    <td>Profesor Test</td>
-                    <td>Lunes</td>
-                    <td>14:00</td>
+                    <th scope="row">{{ $consulta->id }}</th>
+                    <td>{{ $consulta->materia->descripcion }}</td>
+                    <td>{{ $consulta->profesor->nombre }}</td>
+                    <td>{{ $dias->where('numero', $consulta->numero_dia)->first()->descripcion}}</td>
+                    <td>{{ $consulta->hora }}</td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Redes</td>
-                    <td>Profesor Test</td>
-                    <td>Martes</td>
-                    <td>14:00</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Entornos Gráficos</td>
-                    <td>Profesor Test</td>
-                    <td>Jueves</td>
-                    <td>14:00</td>
-                </tr>
+                @endforeach
                 </tbody>
             </table>
+            {{ $consultas->links() }}
             </div>
         </div>
     </div>
