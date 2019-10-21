@@ -39,9 +39,8 @@ Route::prefix('admin')->group(function () {
         return view('pages.admin.profesores.listado');
     })->name('admin.profesores');
 
-    Route::get('materias', function () {
-        return view('pages.admin.materias.listado');
-    })->name('admin.materias');
+    Route::get('materias',  'ConsultaController@index_materia')->name('admin.materias');
+
 
     Route::get('consultas', 'ConsultaController@index')->name('admin.consultas');
 

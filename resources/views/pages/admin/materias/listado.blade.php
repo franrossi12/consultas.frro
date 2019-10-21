@@ -17,28 +17,18 @@
                     <th scope="col">#</th>
                     <th scope="col">Carrera</th>
                     <th scope="col">Materia</th>
-                    <th scope="col">Año</th>
+              {{--  <th scope="col">Año</th>   --}}
                 </tr>
                 </thead>
+                @foreach($materias as $materia)
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>ISI</td>
-                    <td>Comunicaciones</td>
-                    <td>3°</td>
+                    <th scope="row">{{ $materia->id }}</th>
+                    <td>{{ $materia->carrera_id }}</td>
+                    <td>{{ $materia->descripcion }}</td>
+                {{--       <td>3°</td> --}}
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>ISI</td>
-                    <td>Redes</td>
-                    <td>4°</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>ISI</td>
-                    <td>Entornos Gráficos</td>
-                    <td>3°</td>
-                </tr>
+                @endforeach
                 </tbody>
             </table>
             </div>
