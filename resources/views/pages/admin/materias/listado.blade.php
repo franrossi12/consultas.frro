@@ -24,7 +24,7 @@
                 <tbody>
                 <tr>
                     <th scope="row">{{ $materia->id }}</th>
-                    <td>{{ $materia->carrera_id }}</td>
+                    <td>{{ $materia->carrera->descripcion }}</td>
                     <td>{{ $materia->descripcion }}</td>
                 {{--       <td>3°</td> --}}
                 </tr>
