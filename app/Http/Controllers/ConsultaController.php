@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Modelos\Consulta;
 use App\Modelos\Dia;
 use App\Modelos\Materia;
+use App\Modelos\Usuario;
 
 class ConsultaController extends Controller
 {
@@ -20,5 +21,10 @@ class ConsultaController extends Controller
       //$dias = Dia::all();
       return view('pages.admin.materias.listado')->with(['materias' => $materias]);
         }
+
+    public function index_profesor() {
+      $profesores = Usuario::paginate(1);
+      return view('pages.admin.profesores.listado')->with(['usuarios' => $profesores]);
+            }
 
 }
