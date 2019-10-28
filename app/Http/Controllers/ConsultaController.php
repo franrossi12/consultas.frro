@@ -24,7 +24,7 @@ class ConsultaController extends Controller
 
     public function index_profesor() {
       $profesores = Usuario::paginate(1);
-      return view('pages.admin.profesores.listado')->with(['usuarios' => $profesores]);
+      return view('pages.admin.profesores.listado')->with(['profesores' => $profesores]);
             }
 
 }

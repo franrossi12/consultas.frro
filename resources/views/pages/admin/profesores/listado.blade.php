@@ -31,7 +31,7 @@
                 </tbody>
                 @endforeach
             </table>
-            {{ $profesor->links() }}
+            {{ $profesores->links() }}
             </div>
         </div>
     </div>
