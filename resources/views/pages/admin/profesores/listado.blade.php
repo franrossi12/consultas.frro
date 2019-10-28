@@ -24,9 +24,9 @@
                 <tbody>
                 <tr>
                     <th scope="row">{{ $profesor->id }}</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>text@gmail.com</td>
+                    <td>{{ $profesor->nombre }}</td>
+                    <td>{{ $profesor->apellido }}</td>
+                    <td>{{ $profesor->email }}</td>
                 </tr>
                 </tbody>
                 @endforeach
