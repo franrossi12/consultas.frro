@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
             <li>
-                <a href="{{ route('auth.login') }}"><button class="btn btn-primary btn-block">Log In or Register</button></a>
+                <a href="{{ route('auth.login') }}"><button class="btn btn-primary btn-block">Inicia sesión o regístrate</button></a>
             </li>
         </ul>
     </div>

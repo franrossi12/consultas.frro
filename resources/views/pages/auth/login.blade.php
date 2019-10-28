@@ -4,7 +4,7 @@
         <div class="row justify-content-center mt-3 mb-3">
             <div class="col-md-6 col-xs-12 col-sm-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-header">{{ __('Iniciar sesión') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('auth.login-submit') }}">
@@ -27,7 +27,7 @@
                             <div class="form-group row">
 
                                 <div class="col-md-12">
-                                    <label for="password" class="col-form-label">{{ __('Password') }}</label>
+                                    <label for="password" class="col-form-label">{{ __('Contraseña') }}</label>
                                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                     @if ($errors->has('password'))
@@ -59,12 +59,12 @@
                             <div class="form-group row mb-4">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary btn-block">
-                                        {{ __('Login') }}
+                                        {{ __('Iniciar sesión') }}
                                     </button>
                                     <br>
                                     <a href="{{ route('auth.register') }}">
                                         <button type="button" class="btn btn-secondary btn-block">
-                                        {{ __('Registrarse') }}
+                                        {{ __('Regístrate') }}
                                     </button></a>
 
                                     <a class="btn btn-link" href="{{ route('auth.forgot') }}">

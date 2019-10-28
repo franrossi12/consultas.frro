@@ -35,9 +35,9 @@ Route::prefix('admin')->group(function () {
         return view('pages.admin.home');
     })->name('admin.home');
 
-    Route::get('profesores',  'ConsultaController@index_profesor')->name('admin.profesores');
+    Route::get('profesores', 'ProfesorController@index')->name('admin.profesores');
 
-    Route::get('materias',  'ConsultaController@index_materia')->name('admin.materias');
+    Route::get('materias',  'MateriaController@index')->name('admin.materias');
 
     Route::get('consultas', 'ConsultaController@index')->name('admin.consultas');
 
