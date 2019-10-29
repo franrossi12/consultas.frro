@@ -49,14 +49,21 @@ Route::prefix('admin')->group(function () {
 });
 /* RUTAS ADMIN */
 
+/* RUTAS PROFESOR */
 Route::prefix('profesor')->group(function () {
     Route::get('home', function () {
         return view('pages.profesor.home');
     })->name('profesor.home');
 });
+/* RUTAS PROFESOR */
 
+/* RUTAS ALUMNO */
 Route::prefix('alumno')->group(function () {
     Route::get('home', function () {
         return view('pages.alumno.home');
     })->name('alumno.home');
+
+    Route::get('perfil', 'PerfilController@index')->name('alumno.perfil');
+    
 });
+/* RUTAS ALUMNO */
