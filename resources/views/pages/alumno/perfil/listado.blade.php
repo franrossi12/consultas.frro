@@ -21,6 +21,7 @@
         <i class="icon-envelope"></i> {{ $perfiles->email }} <br>
         <i class="icon-gift"></i> Agosto 02, 1995
       </p>
+      <button type="button" name="button">Actualizar perfil</button>
     </div>
   </div>
 </div>
