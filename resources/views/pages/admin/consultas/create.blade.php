@@ -36,17 +36,17 @@
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="descripcion" id="id_materia" class="form-control input-sm" placeholder="Materia">
+										<input type="number" name="descripcion" id="materia_id" class="form-control input-sm" placeholder="Materia">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="id_carrera" id="id_profesor" class="form-control input-sm" placeholder="Profesor">
+										<input type="number" name="id_carrera" id="carrera_id" class="form-control input-sm" placeholder="Profesor">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="id_carrera" id="numero_dia" class="form-control input-sm" placeholder="dia">
+										<input type="number" name="id_carrera" id="numero_dia" class="form-control input-sm" placeholder="dia">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">

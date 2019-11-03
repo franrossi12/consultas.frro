@@ -27,26 +27,36 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Nuevo dia sin clase</h3>
+					<h3 class="panel-title">Nuevo Profesor</h3>
 				</div>
 				<div class="panel-body">					
 					<div class="table-container">
-						<form method="POST" action="{{ route('diasSinClase.store') }}"  role="form">
+						<form method="POST" action="{{ route('profesores.store') }}"  role="form">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="descripcion" id="descripcion" class="form-control input-sm" placeholder="motivo ">
+										<input type="text" name="perfil_id" id="perfil_id" class="form-control input-sm" placeholder="perfil id " value="3" disabled>
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="date" name="fecha_desde" id="fecha_desde" class="form-control input-sm" placeholder="fecha desde ">
+										<input type="text" name="descripcion" id="descripcion" class="form-control input-sm" placeholder="nombre ">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="date" name="fecha_hasta" id="fecha_hasta" class="form-control input-sm" placeholder="fecha hasta ">
+										<input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="apellido">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="email" name="email" id="email" class="form-control input-sm" placeholder="email">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="password" name="password" id="password" class="form-control input-sm" placeholder="password">
 									</div>
 								</div>
                             </div>

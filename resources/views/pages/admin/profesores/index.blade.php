@@ -23,9 +23,9 @@
                         <table id="mytable" class="table table-bordred table-striped">
                             <thead>
                                 <th scope="col">#</th>
-                                <th scope="col">motivo</th>
-                                <th scope="col">fecha_desde</th>
-                                <th scope="col">fecha_hasta</th>
+                                <th scope="col">nombre</th>
+                                <th scope="col">apellido</th>
+                                <th scope="col">email</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </thead>
