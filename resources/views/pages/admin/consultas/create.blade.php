@@ -27,26 +27,31 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Nuevo dia sin clase</h3>
+					<h3 class="panel-title">Nueva consulta</h3>
 				</div>
 				<div class="panel-body">					
 					<div class="table-container">
-						<form method="POST" action="{{ route('diasSinClase.store') }}"  role="form">
+						<form method="POST" action="{{ route('consultas.store') }}"  role="form">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="descripcion" id="descripcion" class="form-control input-sm" placeholder="motivo ">
+										<input type="text" name="descripcion" id="id_materia" class="form-control input-sm" placeholder="Materia">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="date" name="fecha_desde" id="fecha_desde" class="form-control input-sm" placeholder="fecha desde ">
+										<input type="text" name="id_carrera" id="id_profesor" class="form-control input-sm" placeholder="Profesor">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="date" name="fecha_hasta" id="fecha_hasta" class="form-control input-sm" placeholder="fecha hasta ">
+										<input type="text" name="id_carrera" id="numero_dia" class="form-control input-sm" placeholder="dia">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="time" name="hora" id="hora" class="form-control input-sm" placeholder="hora">
 									</div>
 								</div>
                             </div>
@@ -55,7 +60,7 @@
 
 								<div class="col-xs-12 col-sm-12 col-md-12">
 									<input type="submit"  value="Guardar" class="btn btn-success btn-block">
-									<a href="{{ route('diasSinClase.index') }}" class="btn btn-info btn-block" >Atrás</a>
+									<a href="{{ route('consultas.index') }}" class="btn btn-info btn-block" >Atrás</a>
 								</div>	
 
 							</div>

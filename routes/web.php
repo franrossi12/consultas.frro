@@ -35,16 +35,14 @@ Route::prefix('admin')->group(function () {
         return view('pages.admin.home');
     })->name('admin.home');
 
-    Route::get('profesores', function () {
-        return view('pages.admin.profesores.listado');
-    })->name('admin.profesores');
+    Route::resource('profesores', 'ProfesorController');
+    
+    Route::resource('materias', 'MateriaController');
 
-    Route::get('materias',  'ConsultaController@index_materia')->name('admin.materias');
-        
     Route::resource('diasSinClase', 'diaSinClaseController');
     
-    Route::get('consultas', 'ConsultaController@index')->name('admin.consultas');
-
+    Route::resource('consultas', 'ConsultaController');
+    
     Route::get('eventos', function () {
         return view('pages.admin.queries.query');
     })->name('admin.eventos');

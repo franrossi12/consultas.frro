@@ -4,17 +4,17 @@
     <div class="list-group list-group-flush">
 
         <a
-            href="{{ route('admin.profesores') }}"
+            href="{{ route('profesores.index') }}"
             class="list-group-item list-group-item-action {{ request()->is('admin/profesores') ? 'active' : '' }}">
             Profesores
         </a>
         <a
-            href="{{ route('admin.materias') }}"
+            href="{{ route('materias.index') }}"
             class="list-group-item list-group-item-action {{ request()->is('admin/materias') ? 'active' : '' }}">
             Materias
         </a>
         <a
-            href="{{ route('admin.consultas') }}"
+            href="{{ route('consultas.index') }}"
             class="list-group-item list-group-item-action {{ request()->is('admin/consultas') ? 'active' : '' }}">
             Consultas
         </a>

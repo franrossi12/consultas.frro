@@ -27,35 +27,40 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Nuevo dia sin clase</h3>
+					<h3 class="panel-title">Editar Consulta</h3>
 				</div>
 				<div class="panel-body">					
 					<div class="table-container">
-						<form method="POST" action="{{ route('diasSinClase.store') }}"  role="form">
+						<form method="POST" action="{{ route('consultas.update',$consultas->id) }}"  role="form">
 							{{ csrf_field() }}
+							<input name="_method" type="hidden" value="PATCH">
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="descripcion" id="descripcion" class="form-control input-sm" placeholder="motivo ">
+										<input type="text" name="descripcion" id="descripcion" class="form-control input-sm" value="{{$consultas->id_materia}}">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="date" name="fecha_desde" id="fecha_desde" class="form-control input-sm" placeholder="fecha desde ">
+										<input type="text" name="id_carrera" id="id_carrera" class="form-control input-sm" value="{{$consultas->id_profesor}}">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="date" name="fecha_hasta" id="fecha_hasta" class="form-control input-sm" placeholder="fecha hasta ">
+										<input type="text" name="id_carrera" id="id_carrera" class="form-control input-sm" value="{{$consultas->numero_dia}}">
 									</div>
 								</div>
-                            </div>
-                            
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="text" name="id_carrera" id="id_carrera" class="form-control input-sm" value="{{$consultas->hora}}">
+									</div>
+								</div>
+							</div>
 							<div class="row">
 
 								<div class="col-xs-12 col-sm-12 col-md-12">
-									<input type="submit"  value="Guardar" class="btn btn-success btn-block">
-									<a href="{{ route('diasSinClase.index') }}" class="btn btn-info btn-block" >Atrás</a>
+									<input type="submit"  value="Actualizar" class="btn btn-success btn-block">
+									<a href="{{ route('consultas.index') }}" class="btn btn-info btn-block" >Atrás</a>
 								</div>	
 
 							</div>

@@ -55,7 +55,7 @@
 
 								<div class="col-xs-12 col-sm-12 col-md-12">
 									<input type="submit"  value="Guardar" class="btn btn-success btn-block">
-									<a href="{{ route('diasSinClase.index') }}" class="btn btn-info btn-block" >Atrás</a>
+									<a href="{{ route('profesores.index') }}" class="btn btn-info btn-block" >Atrás</a>
 								</div>	
 
 							</div>
