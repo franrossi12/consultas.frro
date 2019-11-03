@@ -20,7 +20,7 @@ class Consulta extends Model
       return $this->belongsTo(Materia::class, 'materia_id');
     }
 
-        public function profesor() {
-          return $this->belongsTo(Usuario::class, 'profesor_id');
+    public function profesor() {
+      return $this->belongsTo(Usuario::class, 'profesor_id');
         }
 }

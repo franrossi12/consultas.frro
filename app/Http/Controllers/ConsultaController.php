@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Modelos\Consulta;
 use App\Modelos\Dia;
 use App\Modelos\Materia;
+use App\Modelos\Usuario;
 
 class ConsultaController extends Controller
 {

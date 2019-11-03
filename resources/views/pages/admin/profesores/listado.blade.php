@@ -20,27 +20,18 @@
                     <th scope="col">Email</th>
                 </tr>
                 </thead>
+                @foreach($profesores as $profesor)
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>text@gmail.com</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>text@gmail.com</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>text@gmail.com</td>
+                    <th scope="row">{{ $profesor->id }}</th>
+                    <td>{{ $profesor->nombre }}</td>
+                    <td>{{ $profesor->apellido }}</td>
+                    <td>{{ $profesor->email }}</td>
                 </tr>
                 </tbody>
+                @endforeach
             </table>
+            {{ $profesores->links() }}
             </div>
         </div>
     </div>
