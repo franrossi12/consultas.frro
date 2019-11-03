@@ -35,7 +35,6 @@ Route::prefix('admin')->group(function () {
         return view('pages.admin.home');
     })->name('admin.home');
 
-<<<<<<< HEAD
     Route::get('profesores', function () {
         return view('pages.admin.profesores.listado');
     })->name('admin.profesores');
@@ -44,12 +43,6 @@ Route::prefix('admin')->group(function () {
         
     Route::resource('diasSinClase', 'diaSinClaseController');
     
-=======
-    Route::get('profesores', 'ProfesorController@index')->name('admin.profesores');
-
-    Route::get('materias',  'MateriaController@index')->name('admin.materias');
-
->>>>>>> 965fa9a359224a66ea85a2fca0d86e01bb873cad
     Route::get('consultas', 'ConsultaController@index')->name('admin.consultas');
 
     Route::get('eventos', function () {
