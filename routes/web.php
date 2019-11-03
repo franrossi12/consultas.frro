@@ -40,10 +40,10 @@ Route::prefix('admin')->group(function () {
     })->name('admin.profesores');
 
     Route::get('materias',  'ConsultaController@index_materia')->name('admin.materias');
-
-
+        
+    Route::resource('diasSinClase', 'diaSinClaseController');
+    
     Route::get('consultas', 'ConsultaController@index')->name('admin.consultas');
-
 
     Route::get('eventos', function () {
         return view('pages.admin.queries.query');

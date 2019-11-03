@@ -20,8 +20,8 @@
               {{--  <th scope="col">Año</th>   --}}
                 </tr>
                 </thead>
-                @foreach($materias as $materia)
                 <tbody>
+                @foreach($materias as $materia)
                 <tr>
                     <th scope="row">{{ $materia->id }}</th>
                     <td>{{ $materia->carrera->descripcion }}</td>

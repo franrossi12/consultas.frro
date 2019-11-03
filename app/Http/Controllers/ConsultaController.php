@@ -17,8 +17,6 @@ class ConsultaController extends Controller
 
     public function index_materia() {
       $materias = Materia::paginate(1);
-      //$dias = Dia::all();
       return view('pages.admin.materias.listado')->with(['materias' => $materias]);
-        }
-
+    }  
 }

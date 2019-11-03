@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DiaSinClase extends Model
 {
-    protected $table = "dias";
+    protected $table = "dia_sin_clases";
 
     protected $fillable = [
         'id',
