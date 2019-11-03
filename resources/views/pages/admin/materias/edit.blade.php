@@ -42,7 +42,7 @@
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="id_carrera" id="id_carrera" class="form-control input-sm" value="{{$materias->id_carrera}}">
+										<input type="text" name="id_carrera" id="id_carrera" class="form-control input-sm" value="{{$materias->carrera_id}}">
 									</div>
 								</div>
 							</div>

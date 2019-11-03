@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Modelos\DiaSinClase;
 
 
-class diaSinClaseController extends Controller
+class DiaSinClaseController extends Controller
 {
         public function index()
         {

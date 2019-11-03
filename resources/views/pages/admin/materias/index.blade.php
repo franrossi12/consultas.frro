@@ -34,7 +34,7 @@
                                 <tr>
                                 <td>{{ $materia->id }}</th>
                                 <td>{{ $materia->descripcion }}</td>
-                                <td>{{ $materia->id_carrera }}</td>
+                                <td>{{ $materia->carrera_id }}</td>
 
                                 <td><a class="btn btn-primary btn-xs" href="{{action('MateriaController@edit', $materia->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
                                 <td>

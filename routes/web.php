@@ -36,13 +36,13 @@ Route::prefix('admin')->group(function () {
     })->name('admin.home');
 
     Route::resource('profesores', 'ProfesorController');
-    
+
     Route::resource('materias', 'MateriaController');
 
-    Route::resource('diasSinClase', 'diaSinClaseController');
-    
+    Route::resource('diasSinClase', 'DiaSinClaseController');
+
     Route::resource('consultas', 'ConsultaController');
-    
+
     Route::get('eventos', function () {
         return view('pages.admin.queries.query');
     })->name('admin.eventos');
@@ -65,6 +65,6 @@ Route::prefix('alumno')->group(function () {
     })->name('alumno.home');
 
     Route::get('perfil', 'PerfilController@index')->name('alumno.perfil');
-    
+
 });
 /* RUTAS ALUMNO */

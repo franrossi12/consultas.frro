@@ -37,9 +37,9 @@
                                 <td>{{ $diasc->descripcion }}</td>
                                 <td>{{ $diasc->fecha_desde }}</td>
                                 <td>{{ $diasc->fecha_hasta }}</td>
-                                <td><a class="btn btn-primary btn-xs" href="{{action('diaSinClaseController@edit', $diasc->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a class="btn btn-primary btn-xs" href="{{action('DiaSinClaseController@edit', $diasc->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
                                 <td>
-                                <form action="{{action('diaSinClaseController@destroy', $diasc->id)}}" method="post">
+                                <form action="{{action('DiaSinClaseController@destroy', $diasc->id)}}" method="post">
                                 {{csrf_field()}}
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
