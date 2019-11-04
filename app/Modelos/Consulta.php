@@ -22,5 +22,5 @@ class Consulta extends Model
 
     public function profesor() {
       return $this->belongsTo(Usuario::class, 'profesor_id');
-        }
+    }
 }

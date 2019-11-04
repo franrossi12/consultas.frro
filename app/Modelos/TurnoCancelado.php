@@ -10,9 +10,13 @@ class TurnoCancelado extends Model
 
     protected $fillable = [
         'id',
-        'turno_id',
-        'alumno_id',
+        'consulta_id',
+        'fecha',
         'hora',
-        'notificado'
+        'motivo'
     ];
+
+    public function consulta() {
+        return $this->belongsTo(Consulta::class, 'consulta_id');
+    }
 }
