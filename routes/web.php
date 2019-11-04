@@ -67,6 +67,8 @@ Route::middleware(['auth:web', 'is.perfil:ALUMNO'])->group(function () {
         Route::get('perfil', 'PerfilController@index')->name('alumno.perfil');
 
         Route::get('consultas/inscripcion', 'ConsultaController@inscripcionForm')->name('alumno.consultas.inscripcion');
+        Route::get('consultas/listado', 'AlumnoController@listadoConsultas')->name('alumno.consultas.listado');
+
         Route::post('turnos-alumnos', 'TurnoAlumnoController@store')->name('alumno.turno.inscripcion');
 
         Route::get('materias/{id_carrera}', 'MateriaController@getByCarrera')->name('materias.get-por-carrera');

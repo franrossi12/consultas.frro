@@ -18,5 +18,11 @@
             class="list-group-item list-group-item-action {{ request()->is('alumno/consultas/inscripcion') ? 'active' : '' }}">
             Inscripción a Consulta
         </a>
+
+        <a
+            href="{{ route('alumno.consultas.listado') }}"
+            class="list-group-item list-group-item-action {{ request()->is('alumno/consultas/listado') ? 'active' : '' }}">
+            Listado de Consultas
+        </a>
     </div>
 </div>

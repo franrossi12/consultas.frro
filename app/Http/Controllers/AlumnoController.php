@@ -25,4 +25,12 @@ class AlumnoController extends Controller
                         'pasadas'       => count($pasadas)]);
     }
 
+    public function listadoConsultas() {
+        $alumno = Auth::user();
+        $consultas = TurnoAlumno::where('alumno_id',$alumno->id)
+                        ->paginate(15);
+        return view('pages.alumno.consultas.listado')
+                    ->with(['consultas'    => $consultas ]);
+    }
+
 }

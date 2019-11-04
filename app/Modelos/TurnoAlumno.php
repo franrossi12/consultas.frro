@@ -17,6 +17,10 @@ class TurnoAlumno extends Model
         'notificado'
     ];
 
+    protected $dates = [
+        'created_at'
+    ];
+
     public function turno() {
         return $this->belongsTo(Turno::class, 'turno_id');
     }

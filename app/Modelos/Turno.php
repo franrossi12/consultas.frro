@@ -23,4 +23,8 @@ class Turno extends Model
     public function consultaAlternativa() {
         return $this->belongsTo(ConsultaAlternativa::class, 'consulta_alternativa_id');
     }
+    protected $dates = [
+        'created_at',
+        'fecha_hora'
+    ];
 }
