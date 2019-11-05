@@ -40,4 +40,7 @@ class Usuario extends Authenticatable
     public function perfil() {
         return $this->belongsTo(Perfil::class, 'perfil_id');
     }
+    public function isPerfil($perfil) {
+        return $this->perfil->tag === $perfil;
+    }
 }

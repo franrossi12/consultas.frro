@@ -30,10 +30,15 @@ Route::post('resetear-contraseña',  'Auth\ResetPasswordController@resetPassword
 
 
 /* RUTAS ADMIN */
-Route::prefix('admin')->group(function () {
-    Route::get('home', function () {
-        return view('pages.admin.home');
-    })->name('admin.home');
+Route::middleware(['auth:web', 'is.perfil:ADMIN'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::resource('profesores', 'ProfesorController');
+        Route::resource('materias', 'MateriaController');
+        Route::resource('diasSinClase', 'diaSinClaseController');
+        Route::resource('consultas', 'ConsultaController');
+        Route::get('eventos', function () {
+            return view('pages.admin.queries.query');
+        })->name('admin.eventos');
 
     Route::resource('profesores', 'ProfesorController');
 
@@ -47,24 +52,35 @@ Route::prefix('admin')->group(function () {
         return view('pages.admin.queries.query');
     })->name('admin.eventos');
 
+    });
 });
 /* RUTAS ADMIN */
+Route::middleware(['auth:web', 'is.perfil:PROFESOR'])->group(function () {
 
-/* RUTAS PROFESOR */
-Route::prefix('profesor')->group(function () {
-    Route::get('home', function () {
-        return view('pages.profesor.home');
-    })->name('profesor.home');
+    /* RUTAS PROFESOR */
+    Route::prefix('profesor')->group(function () {
+        Route::get('home', function () {
+            return view('pages.profesor.home');
+        })->name('profesor.home');
+    });
 });
+
 /* RUTAS PROFESOR */
 
 /* RUTAS ALUMNO */
-Route::prefix('alumno')->group(function () {
-    Route::get('home', function () {
-        return view('pages.alumno.home');
-    })->name('alumno.home');
+Route::middleware(['auth:web', 'is.perfil:ALUMNO'])->group(function () {
+    Route::prefix('alumno')->group(function () {
+        Route::get('home', 'AlumnoController@home')->name('alumno.home');
 
-    Route::get('perfil', 'PerfilController@index')->name('alumno.perfil');
+        Route::get('perfil', 'PerfilController@index')->name('alumno.perfil');
 
+        Route::get('consultas/inscripcion', 'ConsultaController@inscripcionForm')->name('alumno.consultas.inscripcion');
+        Route::get('consultas/listado', 'AlumnoController@listadoConsultas')->name('alumno.consultas.listado');
+
+        Route::post('turnos-alumnos', 'TurnoAlumnoController@store')->name('alumno.turno.inscripcion');
+
+        Route::get('materias/{id_carrera}', 'MateriaController@getByCarrera')->name('materias.get-por-carrera');
+        Route::post('buscar-consultas', 'ConsultaController@buscarConsultas')->name('alumno.consultas.buscar');
+
+    });
 });
-/* RUTAS ALUMNO */

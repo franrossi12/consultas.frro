@@ -8,11 +8,23 @@ class TurnoAlumno extends Model
 {
     protected $table = "turnos_alumnos";
 
+
     protected $fillable = [
         'id',
-        'consulta_id',
-        'fecha',
+        'turno_id',
+        'alumno_id',
         'hora',
-        'motivo'
+        'notificado'
     ];
+
+    protected $dates = [
+        'created_at'
+    ];
+
+    public function turno() {
+        return $this->belongsTo(Turno::class, 'turno_id');
+    }
+    public function alumno() {
+        return $this->belongsTo(Usuario::class, 'alumno_id');
+    }
 }
