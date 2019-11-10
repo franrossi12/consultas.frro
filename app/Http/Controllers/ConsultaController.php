@@ -63,8 +63,8 @@ class ConsultaController extends Controller
 
     public function inscripcionForm()
     {
-        $carreras = Carrera::all();
-        return view('pages.alumno.consultas.inscripcion.form')->with(['carreras' => $carreras]);
+        $materias = Materia::all();
+        return view('pages.alumno.consultas.inscripcion.form')->with(['materias' => $materias]);
     }
 
     public function index_profesor()

@@ -43,4 +43,7 @@ class Usuario extends Authenticatable
     public function isPerfil($perfil) {
         return $this->perfil->tag === $perfil;
     }
+    public function getNombreCompleto() {
+        return $this->apellido . ', ' . $this->nombre;
+    }
 }

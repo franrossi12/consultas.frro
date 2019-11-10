@@ -1,7 +1,7 @@
 @extends("layout.layout")
 
 @section('sidebar')
-    @include("layout.alumno.sidebar")
+    @include("layout.profesor.sidebar")
 @endsection
 
 @section("content")
@@ -17,10 +17,9 @@
                             <thead>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Materia</th>
-                                <th scope="col">Profesor</th>
+                                <th scope="col">Cantidad Inscriptos</th>
                                 <th scope="col">Fecha Consulta</th>
                                 <th scope="col">Hora Consulta</th>
-                                <th scope="col">Fecha Inscripción</th>
                                 <th>Acciones</th>
                             </thead>
                             <tbody>
@@ -28,11 +27,10 @@
                             @foreach($consultas as $consulta)
                                 <tr>
                                     <td>{{ $consulta->estado() }}</td>
-                                    <td>{{ $consulta->turno->consulta->materia->descripcion }}</th>
-                                    <td>{{ $consulta->turno->consulta->profesor->getNombreCompleto() }}</td>
-                                    <td>{{ $consulta->turno->fecha_hora->format('d/m/Y') }}</th>
-                                    <td>{{ $consulta->turno->fecha_hora->format('H:i')  }}</th>
-                                    <td>{{ $consulta->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $consulta->consulta->materia->descripcion }}</th>
+                                    <td>{{ $consulta->cantidad_alumnos }}</td>
+                                    <td>{{ $consulta->fecha_hora->format('d/m/Y') }}</th>
+                                    <td>{{ $consulta->fecha_hora->format('H:i')  }}</th>
 
                                     <td>
                                         @if($consulta->puedeCancelar())

@@ -25,7 +25,6 @@
                                 <button class="btn col-md-12 cardButton bg-light text-dark" type="buton" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                                     <div class="row">
                                         <div class="col-md-11 text-left">
-                                            <i class="fas fa-female"></i> colo maraca
                                         </div>
                                         <div class="col-md-1">
                                             <i class="flecha fas fa-angle-down"></i>

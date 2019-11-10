@@ -3,7 +3,7 @@
 @section('sidebar')
     @include("layout.admin.sidebar")
 @endsection
-    
+
 @section("content")
 <div class="container">
 
@@ -30,22 +30,24 @@
                                 <th>Eliminar</th>
                             </thead>
                             <tbody>
-                            @if($profesores->count())  
-                            @foreach($profesores as $profesor) 
+                            @if($profesores->count())
+                            @foreach($profesores as $profesor)
                                 <tr>
                                 <td>{{ $profesor->id }}</th>
                                 <td>{{ $profesor->nombre }}</td>
                                 <td>{{ $profesor->apellido }}</td>
                                 <td>{{ $profesor->email }}</td>
-                                <td><a class="btn btn-primary btn-xs" href="{{action('ProfesorController@edit', $profesor->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a class="btn btn-primary btn-xs" href="{{action('ProfesorController@edit', $profesor->id)}}" ><span class="fa fa-pen"></span></a></td>
                                 <td>
                                 <form action="{{action('ProfesorController@destroy', $profesor->id)}}" method="post">
                                 {{csrf_field()}}
                                 <input name="_method" type="hidden" value="DELETE">
-                                <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button class="btn btn-danger btn-xs" type="submit">
+                                    <span class="fa fa-trash"></span>
+                                </button>
                                 </td>
                                 </tr>
-                            @endforeach 
+                            @endforeach
                             @else
                                 <tr>
                                     <td colspan="8">No hay registro !!</td>

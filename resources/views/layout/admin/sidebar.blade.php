@@ -23,10 +23,10 @@
             class="list-group-item list-group-item-action {{ request()->is('admin/diasSinClase') ? 'active' : '' }}">
             Dias sin clase
         </a>
-        <a
-            href="{{ route('admin.eventos') }}"
-            class="list-group-item list-group-item-action {{ request()->is('admin/eventos') ? 'active' : '' }}">
-            Eventos
-        </a>
+{{--        <a--}}
+{{--            href="{{ route('admin.eventos') }}"--}}
+{{--            class="list-group-item list-group-item-action {{ request()->is('admin/eventos') ? 'active' : '' }}">--}}
+{{--            Eventos--}}
+{{--        </a>--}}
     </div>
 </div>

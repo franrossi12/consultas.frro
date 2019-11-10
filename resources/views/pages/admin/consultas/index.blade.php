@@ -3,7 +3,7 @@
 @section('sidebar')
     @include("layout.admin.sidebar")
 @endsection
-    
+
 @section("content")
 <div class="container">
 
@@ -31,25 +31,25 @@
                                 <th>Eliminar</th>
                             </thead>
                             <tbody>
-                            @if($consultas->count())  
-                            @foreach($consultas as $consulta) 
+                            @if($consultas->count())
+                            @foreach($consultas as $consulta)
                                 <tr>
                                 <td>{{ $consulta->id }}</th>
-                                <td>{{ $consulta->id_materia }}</td>
-                                <td>{{ $consulta->id_profesor }}</td>
+                                <td>{{ $consulta->materia->descripcion }}</td>
+                                <td>{{ $consulta->profesor->getNombreCompleto() }}</td>
                                 <td>{{ $consulta->dia }}</td>
                                 <td>{{ $consulta->hora }}</td>
 
-                                <td><a class="btn btn-primary btn-xs" href="{{action('ConsultaController@edit', $consulta->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a class="btn btn-primary btn-xs" href="{{action('ConsultaController@edit', $consulta->id)}}" ><span class="fa fa-pen"></span></a></td>
                                 <td>
                                 <form action="{{action('ConsultaController@destroy', $consulta->id)}}" method="post">
                                         <form action="{{action('ConsultaController@destroy', $consulta->id)}}" method="post">
                                 {{csrf_field()}}
                                 <input name="_method" type="hidden" value="DELETE">
-                                <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><span class="fa fa-trash"></span></button>
                                 </td>
                                 </tr>
-                            @endforeach 
+                            @endforeach
                             @else
                                 <tr>
                                     <td colspan="8">No hay registro !!</td>

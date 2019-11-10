@@ -3,7 +3,7 @@
 @section('sidebar')
     @include("layout.admin.sidebar")
 @endsection
-    
+
 @section("content")
 <div class="container">
 
@@ -29,22 +29,22 @@
                                 <th>Eliminar</th>
                             </thead>
                             <tbody>
-                            @if($materias->count())  
-                            @foreach($materias as $materia) 
+                            @if($materias->count())
+                            @foreach($materias as $materia)
                                 <tr>
                                 <td>{{ $materia->id }}</th>
                                 <td>{{ $materia->descripcion }}</td>
                                 <td>{{ $materia->carrera_id }}</td>
 
-                                <td><a class="btn btn-primary btn-xs" href="{{action('MateriaController@edit', $materia->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a class="btn btn-primary btn-xs" href="{{action('MateriaController@edit', $materia->id)}}" ><span class="fa fa-pen"></span></a></td>
                                 <td>
                                 <form action="{{action('MateriaController@destroy', $materia->id)}}" method="post">
                                 {{csrf_field()}}
                                 <input name="_method" type="hidden" value="DELETE">
-                                <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><span class="fa fa-trash"></span></button>
                                 </td>
                                 </tr>
-                            @endforeach 
+                            @endforeach
                             @else
                                 <tr>
                                     <td colspan="8">No hay registro !!</td>

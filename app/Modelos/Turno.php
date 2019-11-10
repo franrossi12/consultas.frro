@@ -2,6 +2,7 @@
 
 namespace App\Modelos;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Turno extends Model
@@ -22,6 +23,16 @@ class Turno extends Model
 
     public function consultaAlternativa() {
         return $this->belongsTo(ConsultaAlternativa::class, 'consulta_alternativa_id');
+    }
+    public function estado() {
+        if ($this->fecha_hora >= date('Y-m-d H:i:s') ) {
+            return 'Futuras';
+        } else {
+            return 'Pasadas';
+        }
+    }
+    public function puedeCancelar() {
+        return (($this->fecha_hora->diffInDays(Carbon::now()) >= 2) && ($this->estado() === 'Futuras'));
     }
     protected $dates = [
         'created_at',

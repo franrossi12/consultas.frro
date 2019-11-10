@@ -5,41 +5,53 @@
 @endsection
 
 @section("content")
+    <div class="container  row m-2 ">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 bg-light-gray card">
+            <div class="col-12 mt-2">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> Revise los campos obligatorios.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if(Session::has('success'))
+                    <div class="alert alert-info">
+                        {{Session::get('success')}}
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('alumno.perfil.actualizar') }}" role="form">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-12">
+                            <label><b>Nombre:</b></label>
+                            <input type="text" class="form-control" name="nombre" value="{{ $perfiles->nombre }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label><b>Apellido:</b></label>
+                            <input type="text" class="form-control" name="apellido" value="{{ $perfiles->apellido }}">
+                        </div>
+                    </div>
 
-<br>
-<div class="container">
-  <div class="row">
-    <div class="span2">
-      <img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"  alt="" class="img-rounded">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <label><b>Email:</b></label>
+                            <input type="text" class="form-control" name="email" value="{{ $perfiles->email }}">
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3 mb-2">
+                        <button class="btn btn-block btn-primary" type="submit" name="button">Actualizar perfil</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
     </div>
-    <div class="span4">
-      <blockquote>
-        <p>{{ $perfiles->nombre }} {{ $perfiles->apellido }}</p>
-        <small><cite title="Source Title">Rosario, Argentina  <i class="icon-map-marker"></i></cite></small>
-      </blockquote>
-      <p>
-        <i class="icon-envelope"></i> {{ $perfiles->email }} <br>
-        <i class="icon-gift"></i> Agosto 02, 1995
-      </p>
-      <button type="button" name="button">Actualizar perfil</button>
-    </div>
-  </div>
-</div>
-
-<!--
-<br>
-<br>
-id:
-{{ $perfiles->id }}
-<br>
-nombre:
-{{ $perfiles->nombre }}
-<br>
-apellido:
-{{ $perfiles->apellido }}
-<br>
-email:
-{{ $perfiles->email }}  -->
-
-
 @endsection

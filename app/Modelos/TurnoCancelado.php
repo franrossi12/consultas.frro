@@ -11,12 +11,16 @@ class TurnoCancelado extends Model
     protected $fillable = [
         'id',
         'consulta_id',
-        'fecha',
-        'hora',
+        'consulta_alternativa_id',
+        'fecha_hora',
         'motivo'
     ];
 
     public function consulta() {
         return $this->belongsTo(Consulta::class, 'consulta_id');
     }
+    protected $dates = [
+        'created_at',
+        'fecha_hora'
+    ];
 }

@@ -52,16 +52,17 @@ Route::middleware(['auth:web', 'is.perfil:ADMIN'])->group(function () {
         return view('pages.admin.queries.query');
     })->name('admin.eventos');
 
+    Route::get('home', 'AdminController@home')->name('admin.home');
+
     });
 });
 /* RUTAS ADMIN */
+/* RUTAS PROFESOR */
 Route::middleware(['auth:web', 'is.perfil:PROFESOR'])->group(function () {
-
-    /* RUTAS PROFESOR */
     Route::prefix('profesor')->group(function () {
-        Route::get('home', function () {
-            return view('pages.profesor.home');
-        })->name('profesor.home');
+        Route::get('home', 'ProfesorController@home')->name('profesor.home');
+        Route::get('consultas/listado', 'ProfesorController@listadoConsultas')->name('profesor.consultas.listado');
+
     });
 });
 
@@ -73,6 +74,7 @@ Route::middleware(['auth:web', 'is.perfil:ALUMNO'])->group(function () {
         Route::get('home', 'AlumnoController@home')->name('alumno.home');
 
         Route::get('perfil', 'PerfilController@index')->name('alumno.perfil');
+        Route::post('perfil', 'AlumnoController@actualizarPerfil')->name('alumno.perfil.actualizar');
 
         Route::get('consultas/inscripcion', 'ConsultaController@inscripcionForm')->name('alumno.consultas.inscripcion');
         Route::get('consultas/listado', 'AlumnoController@listadoConsultas')->name('alumno.consultas.listado');
@@ -81,6 +83,7 @@ Route::middleware(['auth:web', 'is.perfil:ALUMNO'])->group(function () {
 
         Route::get('materias/{id_carrera}', 'MateriaController@getByCarrera')->name('materias.get-por-carrera');
         Route::post('buscar-consultas', 'ConsultaController@buscarConsultas')->name('alumno.consultas.buscar');
+        Route::post('cancelar-consultas', 'AlumnoController@cancelarConsulta')->name('alumno.consultas.cancelar');
 
     });
 });
