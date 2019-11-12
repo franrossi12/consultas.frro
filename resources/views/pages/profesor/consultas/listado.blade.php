@@ -83,7 +83,7 @@
     methods:{
       cancelarConfirmar(id) {
         Swal.fire({
-          title: 'Cancelar inscripcion!',
+          title: 'Cancelar Consulta!',
           text: 'Usted desea cancelar la consulta, confirmar?',
           icon: 'question',
           confirmButtonText: 'Sí',

@@ -65,16 +65,19 @@ class ProfesorController extends Controller
             $profesores=usuario::find($id);
             return view('pages.admin.profesores.edit',compact('profesores'));
         }
-        public function update(Request $request, $id)
+        public function update(Request $request)
         {
-          $this->validate($request,[  'perfil_id'=>'required',
-                                      'nombre'=>'required',
-                                      'apellido'=>'required',
-                                      'email'=>'required',
-                                      'password'=>'required']);
-          Usuario::find($id)->update($request->all());
+            $this->validate($request, [ 'nombre'     => 'required',
+                                        'apellido'  => 'required',
+                                        'email'     => 'required']);
+            $usuario = Auth::user();
+            $usuario->nombre = $request->get('nombre');
+            $usuario->apellido = $request->get('apellido');
+            $usuario->email = $request->get('email');
+            $usuario->save();
 
-            return redirect()->route('profesores.index')->with('success','Registro actualizado satisfactoriamente');
+            return redirect()->route('profesor.perfil')
+                            ->with('success', 'Perfil actualizado correctamente.');
         }
         public function destroy($id)
         {

@@ -26,11 +26,18 @@
                               :reduce="mat => mat.id"
                               label="descripcion"
                               placeholder="Seleccione Materia">
-                        <div slot="no-options">No hay opciones aquí</div>
+                              <div slot="no-options">No hay opciones aquí</div>
                     </v-select>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
-                    <input v-model="profesor" type="text" class="form-control" placeholder="Profes@r">
+                  <v-select v-model="profesor"
+                            class="style-chooser"
+                            :options="profesores"
+                            :reduce="pro => pro.id"
+                            label="apellido"
+                            placeholder="Seleccione Profesor">
+                            <div slot="no-options">No hay opciones aquí</div>
+        </v-select>
                 </div>
                 <div class="col-12">
                     <div class="alert alert-warning text-center" v-if="datosVacios">
@@ -44,7 +51,7 @@
             <div class="row bg-light-gray p-md-3 p-lg-3 ml-md-3 mr-md-3 mt-md-2 pt-1 row-consultas"
                  v-if="sinConsultas">
                 <div class="col-md-12 col-lg-12 col-12 mb-2">
-                    <h3>No hay consultas disponibles</h3>
+                    <h5>No hay consultas disponibles</h3>
                 </div>
             </div>
         </div>
@@ -107,6 +114,7 @@
           carreras: [],
           materias: @json($materias),
           materia: '',
+          profesores: @json($profesores),
           profesor: '',
           consultas: [],
           fecha: null,

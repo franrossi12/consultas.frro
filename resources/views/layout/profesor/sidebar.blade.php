@@ -8,6 +8,11 @@
             Inicio
         </a>
         <a
+            href="{{ route('profesor.perfil') }}"
+            class="list-group-item list-group-item-action {{ request()->is('profesor/perfil') ? 'active' : '' }}">
+            Perfil
+        </a>
+        <a
             href="{{ route('profesor.consultas.listado') }}"
             class="list-group-item list-group-item-action {{ request()->is('profesor/consultas/listado') ? 'active' : '' }}">
             Listado de Consultas

@@ -62,7 +62,9 @@ Route::middleware(['auth:web', 'is.perfil:PROFESOR'])->group(function () {
     Route::prefix('profesor')->group(function () {
         Route::get('home', 'ProfesorController@home')->name('profesor.home');
         Route::get('consultas/listado', 'ProfesorController@listadoConsultas')->name('profesor.consultas.listado');
-
+        
+        Route::get('perfil', 'PerfilController@index')->name('profesor.perfil');
+        Route::post('perfil', 'ProfesorController@update')->name('profesor.perfil.actualizar');    
     });
 });
 

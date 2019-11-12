@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Modelos\Carrera;
 use App\Modelos\Consulta;
 use App\Modelos\Materia;
+use App\Modelos\Usuario;
+use App\Modelos\Dia;
 use Illuminate\Http\Request;
+
 
 
 class ConsultaController extends Controller
@@ -30,18 +33,13 @@ class ConsultaController extends Controller
         return redirect()->route('consultas.index')->with('success', 'Registro creado satisfactoriamente');
     }
 
-    public function edit($id)
-    {
-        $consultas = Consulta::find($id);
-        return view('pages.admin.consultas.edit', compact('consultas'));
-    }
-
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['materia_id' => 'required',
-            'profesor_id' => 'required',
-            'numero_dia' => 'required',
-            'hora' => 'required']);
+        $this->validate($request,[  'carrera' => 'required',
+                                    'materia' => 'required',
+                                    'profesor' => 'required',
+                                    'numero' => 'required',
+                                    'hora' => 'required']);
         Consulta::find($id)->update($request->all());
 
 
@@ -51,7 +49,6 @@ class ConsultaController extends Controller
     public function index_materia()
     {
         $materias = Materia::paginate(1);
-        //$dias = Dia::all();
         return view('pages.admin.materias.listado')->with(['materias' => $materias]);
     }
 
@@ -60,11 +57,25 @@ class ConsultaController extends Controller
         Materia::find($id)->delete();
         return redirect()->route('consultas.index')->with('success', 'Registro eliminado satisfactoriamente');
     }
+    public function edit($id){
+        $consulta= Consulta::find($id);
+        $dias= Dia::all();
+        $materias = Materia::all();
+        $carreras = Carrera::all();
+        $profesores = Usuario::where('perfil_id','3')->get();
+        return view('pages.admin.consultas.edit')->with([
+            'consulta' => $consulta,
+            'dias' => $dias,
+            'materias' => $materias,
+            'profesores' => $profesores,
+            'carreras' => $carreras]);
+    }
 
     public function inscripcionForm()
     {
         $materias = Materia::all();
-        return view('pages.alumno.consultas.inscripcion.form')->with(['materias' => $materias]);
+        $profesores = Usuario::where('perfil_id','3')->get();
+        return view('pages.alumno.consultas.inscripcion.form')->with(['materias' => $materias,'profesores' => $profesores]);
     }
 
     public function index_profesor()
@@ -86,8 +97,7 @@ class ConsultaController extends Controller
             $query = $query->where('materias.id', $filtros['materia']);
         }
         if ($filtros['profesor'] != '' && !empty($filtros['profesor'])) {
-            $query->where('usuarios.apellido', 'LIKE', '%' . $filtros['profesor'] . '%')
-                ->orWhere('usuarios.nombre', 'LIKE', '%' . $filtros['profesor'] . '%');
+            $query->where('usuarios.id', $filtros['profesor']);
         }
         $consultas = $query->get();
         return response()->json($consultas);
