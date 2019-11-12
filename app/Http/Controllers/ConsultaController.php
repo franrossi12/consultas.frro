@@ -93,6 +93,8 @@ class ConsultaController extends Controller
             ->join('usuarios', 'usuarios.id', '=', 'consultas.profesor_id')
             ->join('materias', 'materias.id', '=', 'consultas.materia_id');
 
+        // todo falta agregar que merge con consultas alternativas
+
         if ($filtros['materia'] != '' && !empty($filtros['materia'])) {
             $query = $query->where('materias.id', $filtros['materia']);
         }

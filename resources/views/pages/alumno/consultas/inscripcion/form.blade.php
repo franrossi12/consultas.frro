@@ -65,6 +65,7 @@
                                 :disabled-dates="disabledDates"
                                 v-model="fecha"
                                 :highlighted="consultasFechas"
+                                :language="es"
                     ></datepicker>
                 </div>
                 <div class="col-md-4 col-lg-4 col-12 mb-2">
@@ -129,6 +130,7 @@
           datosVacios: false,
           response: {},
           consultasFechas: [],
+          es: vdp_translation_es.js,
           mostrarCalendario: false
         },
 

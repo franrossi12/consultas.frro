@@ -82,6 +82,7 @@
     },
     methods:{
       cancelarConfirmar(id) {
+        // TODO FALTA METODO CANCELAR PROFESOR
         Swal.fire({
           title: 'Cancelar Consulta!',
           text: 'Usted desea cancelar la consulta, confirmar?',

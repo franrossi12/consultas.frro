@@ -10,10 +10,9 @@ class PerfilController extends Controller
 {
   public function index() {
     $perfiles = Auth::user();
-    if (Auth::user()->id == 2) {
+    if (Auth::user()->isPerfil('ALUMNO')) {
       $perfiles = Auth::user();
       return view('pages.alumno.perfil.listado')->with(['perfiles' => $perfiles]);
-      
     } else {
       $perfiles = Auth::user();
       return view('pages.profesor.perfil.listado')->with(['perfiles' => $perfiles]);

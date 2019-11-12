@@ -107,7 +107,7 @@
           .then(response => {
               this.response = response.data;
               if (response.data.error) {
-                toastr.error(this.response.msg, 'Error al tratar de inscribir', {timeOut: 5000})
+                toastr.error(this.response.msg, 'Error al tratar de cancelar', {timeOut: 5000})
               } else {
                 toastr.success(this.response.msg, 'Cancelación exitosa' , {timeOut: 5000})
                 location.reload();

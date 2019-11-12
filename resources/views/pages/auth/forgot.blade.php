@@ -7,10 +7,11 @@
                 <div class="card-header">{{ __('Reiniciar Contraseña') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('auth.reset-submit') }}">
-                        @csrf
                         @if(!empty($usuario))
-                            <input type="hidden" name="email" id="email" value="{{$usuario->email}}">
+                        <form method="POST" action="{{ route('auth.reset-submit') }}">
+                            @csrf
+
+                        <input type="hidden" name="email" id="email" value="{{$usuario->email}}">
 
                             <div class="form-group row">
 
@@ -52,7 +53,7 @@
                                 <div class="form-group row">
 
                                     <div class="col-md-12">
-                               |         <label for="email" class=" col-form-label">{{ __('E-Mail') }}</label>
+                                        <label for="email" class=" col-form-label">{{ __('E-Mail') }}</label>
                                         <input id="email" type="email"
                                                class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                                name="email" value="{{ old('email') }}" required autofocus>
