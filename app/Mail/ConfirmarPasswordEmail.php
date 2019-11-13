@@ -30,6 +30,8 @@ class ConfirmarPasswordEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.confirmation-password')->with(['usuario' => $this->usuario]);
+        return $this->subject('Confirmación de Contraseña')
+            ->view('emails.confirmation-password')
+            ->with(['usuario' => $this->usuario]);
     }
 }

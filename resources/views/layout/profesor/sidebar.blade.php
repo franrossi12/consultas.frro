@@ -17,5 +17,10 @@
             class="list-group-item list-group-item-action {{ request()->is('profesor/consultas/listado') ? 'active' : '' }}">
             Listado de Consultas
         </a>
+        <a
+            href="{{ route('profesor.consultas.cancelar') }}"
+            class="list-group-item list-group-item-action {{ request()->is('profesor/consultas/cancelar') ? 'active' : '' }}">
+            Cancelar consultas futuras
+        </a>
     </div>
 </div>

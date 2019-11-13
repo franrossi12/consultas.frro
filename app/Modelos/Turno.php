@@ -14,17 +14,23 @@ class Turno extends Model
         'consulta_id',
         'consulta_alternativa_id',
         'fecha_hora',
-        'cantidad_alumnos'
+        'cantidad_alumnos',
+        'cancelado'
     ];
 
     public function consulta() {
         return $this->belongsTo(Consulta::class, 'consulta_id');
     }
-
+    public function turnosAlumno() {
+        return $this->hasMany(TurnoAlumno::class, 'turno_id');
+    }
     public function consultaAlternativa() {
         return $this->belongsTo(ConsultaAlternativa::class, 'consulta_alternativa_id');
     }
     public function estado() {
+        if ($this->cancelado === 1) {
+            return 'Cancelada';
+        }
         if ($this->fecha_hora >= date('Y-m-d H:i:s') ) {
             return 'Futuras';
         } else {

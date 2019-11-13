@@ -57,11 +57,11 @@
                     <td align="center">
                         <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
                             <tr>
-                                <td class="td" bgcolor="#343a40" style="width:650px; min-width:650px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;">
+                                <td class="td" bgcolor="#343a40" style="width:650px; min-width:650px; padding:0; margin:0; font-weight:normal;">
                                     <!-- Header -->
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#343a40">
                                         <tr>
-                                            <td class="p30-15-0" style="padding: 20px 20px 0px 20px;">
+                                            <td class="p30-15-0" style="padding: 20px 20px 20px 20px;">
                                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                     <tr>
                                                         <th class="column">
@@ -69,8 +69,11 @@
                                                                 <tr>
                                                                     <td class="img m-center" style="font-size:0pt; line-height:0pt; text-align:left;">
                                                                         <a href="https://www.frro.utn.edu.ar/" target="_blank">
-                                                                            <img src="{{ asset('img/logo_utn') }}"  height="45" border="0" alt="" />
+                                                                            <img src="{{ asset('img/logoutnwhite.png') }}"  height="50" border="0" alt="" />
                                                                         </a>
+                                                                    </td>
+                                                                    <td class="" style="text-align:left; color: white;">
+                                                                        <h4>Consultas FRRO</h4>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -85,7 +88,7 @@
                                     <!-- Intro -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
                                         <tr>
-                                            <td  style="padding: 10px 30px 10px 50px; color:#000000; text-align:center;">
+                                            <td  style="padding: 10px 30px 10px 50px; color:#000000; text-align:left;">
                                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                     @yield('content')
                                                 </table>

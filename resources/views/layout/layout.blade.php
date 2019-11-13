@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
     <script src="{{asset('js/libs/toastr.min.js')}}"></script>
+    <script src="{{asset('js/libs/sweetalert.js')}}"></script>
 
 
 </head>

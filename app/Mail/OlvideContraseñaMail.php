@@ -30,6 +30,9 @@ class OlvideContraseñaMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.forgot-password')->with(['token' => $this->token, 'nombre' => $this->nombre]);
+        return $this
+            ->subject('Resetear Contraseña')
+            ->view('emails.forgot-password')
+            ->with(['token' => $this->token, 'nombre' => $this->nombre]);
     }
 }
