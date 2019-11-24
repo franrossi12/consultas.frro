@@ -12,7 +12,7 @@ class AlumnoController extends Controller
     public function home() {
         $alumno = Auth::user();
         $consultas = TurnoAlumno::where('alumno_id',$alumno->id)
-            ->select('fecha_hora', 'cancelado')
+            ->select('fecha_hora', 'turnos_alumnos.cancelado')
             ->join('turnos', 'turnos.id', '=', 'turnos_alumnos.turno_id')
             ->get();
 

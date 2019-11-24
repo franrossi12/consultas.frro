@@ -76,7 +76,8 @@ Route::middleware(['auth:web', 'is.perfil:PROFESOR'])->group(function () {
         Route::get('perfil', 'PerfilController@index')->name('profesor.perfil');
         Route::post('perfil', 'ProfesorController@update')->name('profesor.perfil.actualizar');
         Route::post('cancelar-consultas', 'ProfesorController@cancelarConsulta')->name('profesor.consultas.cancelar');
-        Route::get('profesor/consultas/cancelar', 'ProfesorController@consultaCancelarIndex')->name('profesor.consultas.cancelar');
+        Route::get('consultas/cancelar', 'ProfesorController@consultaCancelarIndex')->name('profesor.consultas.cancelar');
+        Route::post('consultas/cancelar-futuras', 'ProfesorController@cancelarConsultaFuturas')->name('profesor.consultas.cancelar.futuras');
 
     });
 });

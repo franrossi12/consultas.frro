@@ -4,11 +4,11 @@
                 <div class="container">
                     <img src="{{asset('img/logoutnwhite.png')}}" class="footer-logo" alt="logo-utn">
                     <br>
-                    <p>UTN | Universidad Tecnologica Nacional&nbsp;</p>
-                    <p>Sarmiento 440&nbsp;(C1041AAJ)</p>
-                    <p>Buenos Aires, Argentina</p>
-                    <p>+54 11 5371 5600</p>
+                    <p>FACULTAD REGIONAL ROSARIO </p>
+                    <p>   Universidad Tecnológica Nacional</p>
+                    <p>   CONTACTOS: ZEBALLOS 1341 - S2000BQA - ROSARIO</p>
+                    <p>   0341 - 4481871   Teléfonos directos e Internos </p>
                 </div>
-        </div>
+            </div>
         </div>
 </footer>

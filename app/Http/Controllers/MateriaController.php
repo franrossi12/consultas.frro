@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Modelos\Carrera;
 use App\Modelos\Materia;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class MateriaController extends Controller
 
     public function create()
     {
-        return view('pages.admin.materias.create');
+        $carreras = Carrera::all();
+        return view('pages.admin.materias.create', compact('carreras'));
     }
 
     public function store(Request $request)
@@ -29,8 +31,9 @@ class MateriaController extends Controller
 
     public function edit($id)
     {
+        $carreras = Carrera::all();
         $materias = materia::find($id);
-        return view('pages.admin.materias.edit', compact('materias'));
+        return view('pages.admin.materias.edit', compact('materias', 'carreras'));
     }
 
     public function update(Request $request, $id)

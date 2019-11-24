@@ -11,8 +11,14 @@
 <div class="row">
     <section class="content">
         <div class="col-md-12">
+
             <div class="panel panel-rigth">
                 <div class="panel-body">
+                    @if(Session::has('success'))
+                        <div class="alert alert-info">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
                     <div class="pull-left"><h3>Lista de Profesores</h3></div>
                         <div class="text center">
                             <div class="btn-group">

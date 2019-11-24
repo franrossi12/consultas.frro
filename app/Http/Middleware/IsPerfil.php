@@ -19,7 +19,7 @@ class IsPerfil
         if (auth()->user()->isPerfil($perfil)) {
             return $next($request);
         } else {
-            return route('auth.login');
+            return redirect()->route('auth.login');
         }
     }
 }

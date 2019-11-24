@@ -1,13 +1,13 @@
 @extends("layout.layout")
 
 @section('sidebar')
-    @include("layout.alumno.sidebar")
+    @include("layout.profesor.sidebar")
 @endsection
 
 @section("content")
-    <div id="form">
-        <div class="card bg-light-gray row-consultas mt-lg-3 mt-md-3">
-            <div class=" row p-md-3 p-lg-3 ml-md-3 mr-md-3 mt-md-3 pt-3 ">
+    <form id="form" v-on:submit.prevent="cancelacionConfirmar()">
+        <div class="card bg-light-gray row-consultas mt-3">
+            <div class="row p-3 ml-3 mr-3 mt-3">
                 <div class="col-md-8 col-lg-8 col-12 col-sm-12 mb-2">
                     <v-select v-model="consulta"
                               class="style-chooser"
@@ -20,7 +20,7 @@
                     </v-select>
                 </div>
             </div>
-            <div class="row  p-md-3 p-lg-3 ml-md-3 mr-md-3 mt-md-2 pt-1 "
+            <div class="row p-3 ml-3 mr-3 mt-2 pt-1 "
                  v-if="mostrarCalendario">
                 <div class="col-md-4 col-lg-4 col-12 mb-2">
                     <datepicker :inline="true"
@@ -30,11 +30,12 @@
                                 v-model="fecha"
                                 :highlighted="consultasFechasH"
                                 :language="es"
+                                required
                     ></datepicker>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12 mb-2">
                     <label for="motivo"><b>Motivo de la cancelación:</b></label> <br>
-                    <textarea name="motivo" id="motivo" cols="50" rows="9" v-model="motivo"></textarea>
+                    <textarea name="motivo" id="motivo" cols="50" rows="9" v-model="motivo"required> </textarea>
                 </div>
 
                 <hr>
@@ -49,6 +50,8 @@
                             <input type="date" name="fecha" id="fecha"
                                    class="form-control input-sm"
                                    placeholder="Fecha Alternativa"
+                                   required
+                                   min="{{ date('Y-m-d') }}"
                                    v-model="fechaNueva">
                         </div>
                         <div class="col-md-6 col-lg-6 col-12 mb-2">
@@ -56,6 +59,7 @@
                             <input type="time" name="hora" id="hora"
                                    class="form-control input-sm"
                                    value=""
+                                   required
                                    v-model="horaNueva">
                         </div>
                     </div>
@@ -63,13 +67,14 @@
                 </div>
 
                 <div class=" col-md-12 col-lg-12 col-12 mb-2 mt-2">
-                    <button v-on:click="cancelacionConfirmar()"
-                            class="btn btn-block btn-primary">Cancelar Consulta</button>
+                    <button v-on:click=""
+                            class="btn btn-block btn-primary"
+                    TYPE="submit">Cancelar Consulta</button>
                 </div>
             </div>
         </div>
 
-    </div>
+    </form>
 @endsection
 
 @section('scripts')
@@ -93,12 +98,28 @@
           motivo: '',
           fecha: null,
           url: '{{url('alumno/materias')}}',
+          urlCancelar: '{{url('profesor/consultas/cancelar-futuras')}}',
           es: vdp_translation_es.js,
           mostrarCalendario: false,
           fechaNueva: null,
           horaNueva: null
         },
         methods: {
+          validarForm() {
+            if (this.consulta == null) {
+              return false;
+            }
+            if (this.motivo == '') {
+              return false;
+            }
+            if (this.fechaNueva == null) {
+              return false;
+            }
+            if (this.horaNueva == '' || this.horaNueva == null) {
+              return false;
+            }
+            return true;
+          },
           consultaSelect() {
             this.mostrarCalendario = true;
             this.consultasFechas = [];
@@ -121,10 +142,14 @@
             }
           },
           clearForm() {
+            debugger
             this.consulta = null;
             this.mostrarCalendario = false;
           },
           cancelacionConfirmar() {
+            if (!this.validarForm()) {
+              return false
+            }
             Swal.fire({
               title: 'Cancelar Consulta!',
               text: 'Usted desea cancelar la consulta, confirmar?',
@@ -138,24 +163,25 @@
               }
             })
           },
-          cancelar() {
-            this.consultaExitosa = false;
-            this.errorInscripcion = false;
+          cancelar(e) {
             Swal.showLoading()
+
+            const fechaFor = this.fechaNueva.split('-')
             const data = {
-              consulta_id: this.consultaSeleccionada.id,
+              consulta_id: this.consulta,
               fecha: this.fechaFormateada,
-              hora: this.consultaSeleccionada.hora
+              hora_nueva: this.horaNueva,
+              fecha_nueva: fechaFor[2] + '/' + fechaFor[1] + '/' + fechaFor[0],
+              motivo: this.motivo
             };
             axios
-              .post(`${this.urlInscripcion}`, data)
+              .post(`${this.urlCancelar}`, data)
               .then(response => {
                   this.response = response.data;
                   if (response.data.error) {
-                    toastr.error(this.response.msg, 'Error al tratar de inscribir', {timeOut: 5000})
+                    toastr.error(this.response.msg, 'Error al tratar de cancelar', {timeOut: 5000})
                   } else {
-                    toastr.success(this.response.msg, ' Inscripción exitosa', {timeOut: 5000})
-                    this.datosVacios = true;
+                    toastr.success(this.response.msg, ' Cancelación exitosa', {timeOut: 5000})
                     this.clearForm();
                   }
                   Swal.hideLoading();
@@ -208,6 +234,12 @@
         .style-chooser .vs__clear,
         .style-chooser .vs__open-indicator {
             fill: grey;
+        }
+        textarea {
+            width: 100%;
+        }
+        .vdp-datepicker__calendar {
+            width: 100% !important;
         }
     </style>
 

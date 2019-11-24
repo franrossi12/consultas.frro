@@ -12,7 +12,6 @@ class ConsultaAlternativa extends Model
         'id',
         'materia_id',
         'profesor_id',
-        'numero_dia',
-        'hora'
+        'fecha_hora'
     ];
 }

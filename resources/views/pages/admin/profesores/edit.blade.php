@@ -29,7 +29,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Editar Profesor</h3>
 				</div>
-				<div class="panel-body">					
+				<div class="panel-body">
 					<div class="table-container">
 						<form method="POST" action="{{ route('profesores.update',$profesores->id) }}"  role="form">
 							{{ csrf_field() }}
@@ -56,7 +56,7 @@
 								<div class="col-xs-12 col-sm-12 col-md-12">
 									<input type="submit"  value="Actualizar" class="btn btn-success btn-block">
 									<a href="{{ route('profesores.index') }}" class="btn btn-info btn-block" >Atrás</a>
-								</div>	
+								</div>
 
 							</div>
 						</form>
@@ -66,4 +66,6 @@
 			</div>
 		</div>
 	</section>
-	@endsection
+</div>
+
+@endsection

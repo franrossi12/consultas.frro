@@ -7,7 +7,7 @@
 
 @section('content')
 <div class="row">
-	<section class="content">
+{{--	<section class="content">--}}
 		<div class="col-md-12 col-md-offset-2">
 			@if (count($errors) > 0)
 			<div class="alert alert-danger">
@@ -29,7 +29,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Editar Consulta</h3>
 				</div>
-				<div class="panel-body">					
+				<div class="panel-body">
 					<div class="table-container">
 						<form method="POST" id="form" action="{{ route('consultas.update',$consulta->id) }}"  role="form">
 							{{ csrf_field() }}
@@ -48,7 +48,7 @@
 									</v-select>
 								</div>
 								<div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
-									<v-select name="materia" id="materia" 
+									<v-select name="materia" id="materia"
 										value="{{$consulta->materia_id}}"
 										v-model="materia"
 										class="style-chooser"
@@ -61,8 +61,8 @@
 								</div>
 								<div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
 								  	<v-select name="profesor" id="profesor"
-									  	value="{{$consulta->profesor_id}}"  
-									 	v-model="profesor" 
+									  	value="{{$consulta->profesor_id}}"
+									 	v-model="profesor"
 								  		class="style-chooser"
 										:options="profesores"
 										:reduce="p => p.id"
@@ -73,8 +73,8 @@
 								</div>
 								<div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
 									<v-select name="dia" id="numero_dia"
-										value="{{$consulta->numero_dia}}" 	
-										v-model="dia"								  
+										value="{{$consulta->numero_dia}}"
+										v-model="dia"
 										class="style-chooser"
 										:options="dias"
 										:reduce="d => d.id"
@@ -93,7 +93,7 @@
 								<div class="col-xs-12 col-sm-12 col-md-12">
 									<input type="submit"  value="Actualizar" class="btn btn-success btn-block">
 									<a href="{{ route('consultas.index') }}" class="btn btn-info btn-block" >Atrás</a>
-								</div>	
+								</div>
 
 							</div>
 						</form>
@@ -101,9 +101,10 @@
 				</div>
 			</div>
 			</div>
-		</div>
-	</section>
-	@endsection
+{{--	</section>--}}
+</div>
+
+@endsection
 	@section("beforeEndBody")
 
     <!-- Our View App goes at the end of the document -->
@@ -117,13 +118,13 @@
 			carreras: @json($carreras),
           	carrera: '',
 			dias: @json($dias),
-          	dia: '',  
+          	dia: '',
           	materias: @json($materias),
           	materia: '',
           	profesores: @json($profesores),
           	profesor: '',
         },
-		methods: {	
+		methods: {
 		}
        })
     </script>
