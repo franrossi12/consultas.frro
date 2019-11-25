@@ -1,5 +1,7 @@
 <?php
 
+use App\Modelos\Dia;
+
 function currentUser() {
     return auth()->user();
 }
@@ -38,4 +40,9 @@ function homeRoute() {
                 break;
         }
     }
+}
+
+function getNumeroDia($numero) {
+    $n = Dia::where('numero', $numero)->first();
+    return $n->descripcion;
 }

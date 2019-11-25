@@ -104,8 +104,15 @@ class ProfesorController extends Controller
 
     public function destroy($id)
     {
-        Usuario::find($id)->delete();
-        return redirect()->route('profesores.index')->with('success', 'Registro eliminado satisfactoriamente');
+        $consulta = Consulta::where('profesor_id', $id)->first();
+        if (empty($consulta)) {
+            Usuario::find($id)->delete();
+            return redirect()->route('profesores.index')
+                ->with('success', 'Registro eliminado satisfactoriamente');
+        } else {
+            return redirect()->route('profesores.index')
+                ->with('error', 'No se ha podido eliminar el profesor, posee consultas asociadas.');
+        }
     }
 
     public function cancelarConsulta(Request $request) {

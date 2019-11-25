@@ -9,8 +9,8 @@
 
 
 <div class="row">
-    <section class="content">
-        <div class="col-md-12">
+{{--    <section class="content">--}}
+        <div class="col-md-12 mt-2">
             <div class="panel panel-rigth">
                 <div class="panel-body">
                     @if(Session::has('success'))
@@ -18,6 +18,11 @@
                             {{Session::get('success')}}
                         </div>
                     @endif
+                        @if(Session::has('error'))
+                            <div class="alert alert-danger">
+                                {{Session::get('error')}}
+                            </div>
+                        @endif
                     <div class="pull-left"><h3>Lista de Materias</h3></div>
                         <div class="text center">
                             <div class="btn-group">
@@ -39,7 +44,7 @@
                                 <tr>
                                 <td>{{ $materia->id }}</th>
                                 <td>{{ $materia->descripcion }}</td>
-                                <td>{{ $materia->carrera_id }}</td>
+                                <td>{{ $materia->carrera->descripcion }}</td>
 
                                 <td><a class="btn btn-primary btn-xs" href="{{action('MateriaController@edit', $materia->id)}}" ><span class="fa fa-pen"></span></a></td>
                                 <td>

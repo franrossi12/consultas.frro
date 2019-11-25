@@ -48,20 +48,15 @@ Route::middleware(['auth:web', 'is.perfil:ADMIN'])->group(function () {
         Route::get('eventos', function () {
             return view('pages.admin.queries.query');
         })->name('admin.eventos');
+        Route::resource('profesores', 'ProfesorController');
+        Route::resource('materias', 'MateriaController');
+        Route::resource('diasSinClase', 'DiaSinClaseController');
+        Route::resource('consultas', 'ConsultaController');
+        Route::get('eventos', function () {
+            return view('pages.admin.queries.query');
+        })->name('admin.eventos');
 
-    Route::resource('profesores', 'ProfesorController');
-
-    Route::resource('materias', 'MateriaController');
-
-    Route::resource('diasSinClase', 'DiaSinClaseController');
-
-    Route::resource('consultas', 'ConsultaController');
-
-    Route::get('eventos', function () {
-        return view('pages.admin.queries.query');
-    })->name('admin.eventos');
-
-    Route::get('home', 'AdminController@home')->name('admin.home');
+        Route::get('home', 'AdminController@home')->name('admin.home');
 
     });
 });

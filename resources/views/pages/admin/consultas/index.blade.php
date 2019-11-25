@@ -9,8 +9,8 @@
 
 
 <div class="row">
-    <section class="content">
-        <div class="col-md-12">
+{{--    <section class="content">--}}
+        <div class="col-md-12 mt-2">
             <div class="panel panel-rigth">
                 <div class="panel-body">
                     @if(Session::has('success'))
@@ -42,7 +42,7 @@
                                 <td>{{ $consulta->id }}</th>
                                 <td>{{ $consulta->materia->descripcion }}</td>
                                 <td>{{ $consulta->profesor->getNombreCompleto() }}</td>
-                                <td>{{ $consulta->dia }}</td>
+                                <td>{{ getNumeroDia($consulta->numero_dia) }}</td>
                                 <td>{{ $consulta->hora }}</td>
 
                                 <td><a class="btn btn-primary btn-xs" href="{{action('ConsultaController@edit', $consulta->id)}}" ><span class="fa fa-pen"></span></a></td>

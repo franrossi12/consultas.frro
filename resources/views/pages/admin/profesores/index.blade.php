@@ -9,16 +9,21 @@
 
 
 <div class="row">
-    <section class="content">
+{{--    <section class="content">--}}
         <div class="col-md-12">
 
-            <div class="panel panel-rigth">
+            <div class="panel panel-rigth mt-2">
                 <div class="panel-body">
                     @if(Session::has('success'))
-                        <div class="alert alert-info">
+                        <div class="alert alert-info mt-2">
                             {{Session::get('success')}}
                         </div>
                     @endif
+                        @if(Session::has('error'))
+                            <div class="alert alert-danger mt-2">
+                                {{Session::get('error')}}
+                            </div>
+                        @endif
                     <div class="pull-left"><h3>Lista de Profesores</h3></div>
                         <div class="text center">
                             <div class="btn-group">
@@ -51,6 +56,7 @@
                                 <button class="btn btn-danger btn-xs" type="submit">
                                     <span class="fa fa-trash"></span>
                                 </button>
+                                </form>
                                 </td>
                                 </tr>
                             @endforeach

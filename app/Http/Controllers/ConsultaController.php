@@ -21,13 +21,20 @@ class ConsultaController extends Controller
 
     public function create()
     {
-        return view('pages.admin.consultas.create');
+        $dias= Dia::all();
+        $materias = Materia::all();
+        $profesores = Usuario::where('perfil_id','3')->get();
+
+        return view('pages.admin.consultas.create')
+            ->with(compact('materias', 'profesores', 'dias'));
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, ['descripcion' => 'required',
-            'carrera_id' => 'required']);
+        $this->validate($request, ['materia_id' => 'required',
+            'profesor_id' => 'required',
+            'numero_dia' => 'required',
+            'hora' => 'required']);
         Consulta::create($request->all());
 
         return redirect()->route('consultas.index')->with('success', 'Registro creado satisfactoriamente');
@@ -35,10 +42,9 @@ class ConsultaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request,[  'carrera' => 'required',
-                                    'materia' => 'required',
-                                    'profesor' => 'required',
-                                    'numero' => 'required',
+        $this->validate($request,[  'materia_id' => 'required',
+                                    'profesor_id' => 'required',
+                                    'numero_dia' => 'required',
                                     'hora' => 'required']);
         Consulta::find($id)->update($request->all());
 
@@ -61,14 +67,14 @@ class ConsultaController extends Controller
         $consulta= Consulta::find($id);
         $dias= Dia::all();
         $materias = Materia::all();
-        $carreras = Carrera::all();
         $profesores = Usuario::where('perfil_id','3')->get();
+
         return view('pages.admin.consultas.edit')->with([
             'consulta' => $consulta,
             'dias' => $dias,
             'materias' => $materias,
-            'profesores' => $profesores,
-            'carreras' => $carreras]);
+            'profesores' => $profesores
+        ]);
     }
 
     public function inscripcionForm()

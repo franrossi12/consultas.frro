@@ -9,9 +9,9 @@
 
 
 <div class="row">
-    <section class="content">
+{{--    <section class="content">--}}
         <div class="col-md-12">
-            <div class="panel panel-rigth">
+            <div class="panel panel-rigth mt-2">
                 <div class="panel-body">
                     <div class="pull-left"><h3>Lista de dias sin clase</h3></div>
                         <div class="text center">
@@ -43,6 +43,7 @@
                                 {{csrf_field()}}
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button class="btn btn-danger btn-xs" type="submit"><span class="fa fa-trash"></span></button>
+                                </form>
                                 </td>
                                 </tr>
                             @endforeach

@@ -35,30 +35,17 @@
 							{{ csrf_field() }}
 							<input name="_method" type="hidden" value="PATCH">
 							<div class="row">
-								<div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
-									<v-select name="carrera" id="carrera"
-										v-model="carrera"
-										value="{{$consulta->carrera_id}}"
-										class="style-chooser"
-										:options="carreras"
-										:reduce="c => c.id"
-										label="descripcion"
-										placeholder="Seleccione Carrera">
-										<div slot="no-options">No hay opciones aquí</div>
-									</v-select>
-								</div>
-								<div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
-									<v-select name="materia" id="materia"
-										value="{{$consulta->materia_id}}"
-										v-model="materia"
-										class="style-chooser"
-										:options="materias"
-										reduce="m => m.id"
-										label="descripcion"
-										placeholder="Seleccione Materia">
-										<div slot="no-options">No hay opciones aquí</div>
-									</v-select>
-								</div>
+                                <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
+                                    <v-select name="materia" id="materia"
+                                              v-model="materia"
+                                              class="style-chooser"
+                                              :options="materias"
+                                              :reduce="p => p.id"
+                                              label="descripcion"
+                                              placeholder="Seleccione Materia">
+                                        <div slot="no-options">No hay opciones aquí</div>
+                                    </v-select>
+                                </div>
 								<div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
 								  	<v-select name="profesor" id="profesor"
 									  	value="{{$consulta->profesor_id}}"
@@ -82,15 +69,20 @@
 										placeholder="Seleccione un dia">
 										<div slot="no-options">No hay opciones aquí</div>
 									 </v-select>
+
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="time" name="hora" id="hora" class="form-control input-sm" value="{{$consulta->hora}}">
+										<input type="time" name="hora" id="hora" class="form-control input-sm"  step="2"
+                                               value="{{$consulta->hora}}">
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-12">
+                            <input type="hidden" name="materia_id" :value="this.materia">
+                            <input type="hidden" name="profesor_id" :value="this.profesor">
+                            <input type="hidden" name="numero_dia" :value="this.dia">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
 									<input type="submit"  value="Actualizar" class="btn btn-success btn-block">
 									<a href="{{ route('consultas.index') }}" class="btn btn-info btn-block" >Atrás</a>
 								</div>
@@ -115,14 +107,12 @@
           'v-select': VueSelect.VueSelect
         },
         data: {
-			carreras: @json($carreras),
-          	carrera: '',
 			dias: @json($dias),
-          	dia: '',
+          	dia: {{$consulta->numero_dia}},
           	materias: @json($materias),
-          	materia: '',
+          	materia: {{$consulta->materia_id}},
           	profesores: @json($profesores),
-          	profesor: '',
+          	profesor: {{$consulta->profesor_id}},
         },
 		methods: {
 		}

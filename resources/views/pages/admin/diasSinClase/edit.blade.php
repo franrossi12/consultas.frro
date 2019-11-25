@@ -7,7 +7,7 @@
 
 @section('content')
 <div class="row">
-	<section class="content">
+{{--	<section class="content">--}}
 		<div class="col-md-8 col-md-offset-2">
 			@if (count($errors) > 0)
 			<div class="alert alert-danger">
@@ -65,7 +65,7 @@
 
 			</div>
 		</div>
-	</section>
+{{--	</section>--}}
 </div>
 
 @endsection

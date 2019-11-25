@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Modelos\Carrera;
+use App\Modelos\Consulta;
 use App\Modelos\Materia;
 use Illuminate\Http\Request;
 
@@ -47,8 +48,15 @@ class MateriaController extends Controller
 
     public function destroy($id)
     {
-        Materia::find($id)->delete();
-        return redirect()->route('materias.index')->with('success', 'Registro eliminado satisfactoriamente');
+        $consulta = Consulta::where('materia_id', $id)->first();
+        if (empty($consulta)) {
+            Materia::find($id)->delete();
+            return redirect()->route('materias.index')
+                ->with('success', 'Registro eliminado satisfactoriamente');
+        } else {
+            return redirect()->route('materias.index')
+                ->with('error', 'No se ha podido eliminar la materia, posee consultas asociadas.');
+        }
     }
 
     public function getByCarrera($id_carrera)
