@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PerfilesSeeder::class);
         $this->call(UsuariosSeeder::class);
         $this->call(DiasSeeder::class);
+        $this->call(CarreraSeed::class);
+
     }
 }

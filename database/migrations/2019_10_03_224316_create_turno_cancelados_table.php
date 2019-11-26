@@ -15,11 +15,11 @@ class CreateTurnoCanceladosTable extends Migration
     {
         Schema::create('turnos_cancelados', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('turno_id')->unsigned();
-            $table->foreign('turno_id')->references('id')->on('turnos');
-            $table->bigInteger('alumno_id')->unsigned();
-            $table->foreign('alumno_id')->references('id')->on('usuarios');
-            $table->boolean('notificado')->default(0);
+            $table->integer('consulta_id')->unsigned();
+            $table->foreign('consulta_id')->references('id')->on('consultas');
+            $table->text('motivo');
+            $table->dateTime('fecha_hora')->nullable();
+            $table->integer('consulta_alternativa_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

@@ -92,6 +92,8 @@
         },
         data: {
           consultas: @json($consultas),
+          diasSinClase: @json($dias_sin_clase),
+          diasSinClaseFormateados: [],
           consulta: null,
           consultasFechas: [],
           consultasFechasH: [],
@@ -191,6 +193,28 @@
 
                 })
           },
+          formatearDiasSinClase() {
+            this.diasSinClaseFormateados = [];
+            const self = this
+            $.each(this.diasSinClase, function(key, value){
+              if (value.fecha_desde === value.fecha_hasta || value.fecha_hasta === null) {
+                self.diasSinClaseFormateados.push(new Date(value.fecha_desde))
+              } else {
+                var date1 = new Date(value.fecha_desde);
+                var date2 = new Date(value.fecha_hasta);
+                var diffTime = Math.abs(date2 - date1);
+                var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                for (var i = 0; i <= diffDays; i++) {
+                  var auxDate = new Date(value.fecha_desde);
+                  auxDate.setDate(auxDate.getDate() + i)
+                  self.diasSinClaseFormateados.push(auxDate);
+                }
+              }
+            });
+          },
+        },
+        mounted() {
+          this.formatearDiasSinClase();
         },
         computed: {
           disabledDates: {
@@ -201,11 +225,8 @@
                 // from: new Date(2016, 0, 26), // Disable all dates after specific date
                 days: [0], // Disable Saturday's and Sunday's
                 // todo poner dias sin clases
-                // dates: [ // Disable an array of dates
-                //   new Date(2019, 10, 1),
-                //   new Date(2019, 10, 5),
-                //   new Date(2019, 10, 18)
-                // ],
+                dates: self.diasSinClaseFormateados,// Disable an array of dates
+
                 customPredictor: function (date) {
                   // disables the date if it is a multiple of 5
                   if (typeof (self.consultasFechas) != "undefined" && self.consultasFechas.length > 0) {

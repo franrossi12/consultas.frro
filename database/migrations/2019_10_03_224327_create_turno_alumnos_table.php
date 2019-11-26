@@ -13,13 +13,15 @@ class CreateTurnoAlumnosTable extends Migration
      */
     public function up()
     {
+
         Schema::create('turnos_alumnos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('consulta_id')->unsigned();
-            $table->foreign('consulta_id')->references('id')->on('consultas');
-            $table->date('fecha');
-            $table->time('hora');
-            $table->text('motivo');
+            $table->integer('turno_id')->unsigned();
+            $table->foreign('turno_id')->references('id')->on('turnos');
+            $table->bigInteger('alumno_id')->unsigned();
+            $table->foreign('alumno_id')->references('id')->on('usuarios');
+            $table->boolean('notificado')->default(0);
+            $table->boolean('cancelado')->default(0);
             $table->timestamps();
         });
     }

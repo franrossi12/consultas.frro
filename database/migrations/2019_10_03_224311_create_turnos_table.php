@@ -16,14 +16,15 @@ class CreateTurnosTable extends Migration
         Schema::create('turnos', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('consulta_id')->unsigned();
+            $table->integer('consulta_id')->unsigned()->nullable();
             $table->foreign('consulta_id')->references('id')->on('consultas');
 
-            $table->integer('consulta_alternativa_id')->unsigned();
+            $table->integer('consulta_alternativa_id')->unsigned()->nullable();
             $table->foreign('consulta_alternativa_id')->references('id')->on('consultas_alternativas');
-            $table->date('fecha');
-            $table->time('hora');
+            $table->dateTime('fecha_hora')->nullable();
+
             $table->integer('cantidad_alumnos');
+            $table->boolean('cancelado')->default(0);
 
             $table->timestamps();
         });

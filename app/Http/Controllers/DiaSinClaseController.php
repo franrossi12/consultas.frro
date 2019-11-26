@@ -11,7 +11,7 @@ class DiaSinClaseController extends Controller
         public function index()
         {
             $diasSinClase=diaSinClase::orderBy('id','DESC')->paginate(12);
-            return view('pages.admin.diasSinClase.index',compact('diasSinClase')); 
+            return view('pages.admin.diasSinClase.index',compact('diasSinClase'));
         }
         public function create()
         {
@@ -20,8 +20,7 @@ class DiaSinClaseController extends Controller
         public function store(Request $request)
         {
             $this->validate($request,[  'descripcion'=>'required',
-                                        'fecha_desde'=>'required',       
-                                        'fecha_hasta'=>'required']);
+                                        'fecha_desde'=>'required']);
             DiaSinClase::create($request->all());
 
             return redirect()->route('diasSinClase.index')->with('success','Registro creado satisfactoriamente');
@@ -31,7 +30,7 @@ class DiaSinClaseController extends Controller
             $diasSinClase=diaSinClase::find($id);
             return view('pages.admin.diasSinClase.edit',compact('diasSinClase'));
         }
-        public function update(Request $request, $id)    
+        public function update(Request $request, $id)
         {
             $this->validate($request,[  'descripcion'=>'required',
                                         'fecha_desde'=>'required',

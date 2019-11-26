@@ -90,6 +90,8 @@
         #wrapper.toggled #sidebar-wrapper {
             margin-left: -15rem;
         }
+        .collapse:not(.show) {
+        }
     }
     .home-container {
         background-image: url('../img/fondo.png');

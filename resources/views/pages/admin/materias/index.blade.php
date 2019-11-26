@@ -30,7 +30,7 @@
                             </div>
                         </div>
                     <div class="table-container">
-                        <table id="mytable" class="table table-bordred table-striped">
+                        <table id="mytable" class="table table-bordred table-striped table-responsive">
                             <thead>
                                 <th scope="col">#</th>
                                 <th scope="col">descripcion</th>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Modelos\DiaSinClase;
+use App\Modelos\Materia;
 use App\Modelos\TurnoAlumno;
+use App\Modelos\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +33,7 @@ class AlumnoController extends Controller
         $alumno = Auth::user();
         $consultas = TurnoAlumno::where('alumno_id',$alumno->id)
                         ->join('turnos', 'turnos.id', '=', 'turnos_alumnos.turno_id')
+                        ->select('turnos_alumnos.*', 'turnos.fecha_hora as fecha_hora')
                         ->orderBy('turnos.fecha_hora', 'desc')
                         ->paginate(15);
         return view('pages.alumno.consultas.listado')
@@ -68,6 +72,17 @@ class AlumnoController extends Controller
 
         return redirect()->route('alumno.perfil')
                         ->with('success', 'Perfil actualizado correctamente.');
+    }
+    public function consultasInscripcionForm()
+    {
+        $materias = Materia::all();
+        $profesores = Usuario::where('perfil_id','3')->get();
+        $dias_sin_clase = DiaSinClase::all();
+        return view('pages.alumno.consultas.inscripcion.form')
+            ->with(['materias'          => $materias,
+                    'profesores'        => $profesores,
+                    'dias_sin_clase'    => $dias_sin_clase
+                    ]);
     }
 
 }

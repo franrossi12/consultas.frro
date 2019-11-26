@@ -32,11 +32,11 @@ Route::get('olvide-contraseña/{token}',  'Auth\ForgotPasswordController@form');
 Route::post('resetear-contraseña',  'Auth\ResetPasswordController@resetPassword')->name('auth.reset-submit');
 
 
-Route::get('test-email', function () {
-    $turno = \App\Modelos\Turno::first();
-    Mail::to('rossifrancisco12@gmail.com')
-        ->send(new CancelacionAlumnoEmail($turno));
-});
+//Route::get('test-email', function () {
+//    $turno = \App\Modelos\Turno::first();
+//    Mail::to('rossifrancisco12@gmail.com')
+//        ->send(new CancelacionAlumnoEmail($turno));
+//});
 
 /* RUTAS ADMIN */
 Route::middleware(['auth:web', 'is.perfil:ADMIN'])->group(function () {
@@ -86,7 +86,7 @@ Route::middleware(['auth:web', 'is.perfil:ALUMNO'])->group(function () {
         Route::get('perfil', 'PerfilController@index')->name('alumno.perfil');
         Route::post('perfil', 'AlumnoController@actualizarPerfil')->name('alumno.perfil.actualizar');
 
-        Route::get('consultas/inscripcion', 'ConsultaController@inscripcionForm')->name('alumno.consultas.inscripcion');
+        Route::get('consultas/inscripcion', 'AlumnoController@consultasInscripcionForm')->name('alumno.consultas.inscripcion');
         Route::get('consultas/listado', 'AlumnoController@listadoConsultas')->name('alumno.consultas.listado');
 
         Route::post('turnos-alumnos', 'TurnoAlumnoController@store')->name('alumno.turno.inscripcion');

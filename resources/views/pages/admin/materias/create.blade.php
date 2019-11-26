@@ -46,7 +46,7 @@
 								<div class="col-xs-12 col-sm-12 col-md-6">
 									<div class="form-group">
                                         <select class="form-control" name="carrera_id" id="carrera_id" required>
-                                            <option value="" selected hiden>Seleccione</option>
+                                            <option value="" selected hiden>Seleccione Carrera</option>
                                             @foreach($carreras as $carrera)
                                                 <option value="{{$carrera->id}}">{{$carrera->descripcion}}</option>
                                             @endforeach

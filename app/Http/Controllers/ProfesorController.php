@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\CancelacionAlumnoEmail;
 use App\Modelos\Consulta;
 use App\Modelos\ConsultaAlternativa;
+use App\Modelos\DiaSinClase;
 use App\Modelos\Perfil;
 use App\Modelos\Turno;
 use App\Modelos\TurnoCancelado;
@@ -13,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class ProfesorController extends Controller
@@ -44,9 +46,11 @@ class ProfesorController extends Controller
     public function listadoConsultas()
     {
         $profesor = Auth::user();
-        $consultas = Turno::join('consultas', 'consultas.id', '=', 'turnos.consulta_id')
+        $consultas = Turno::leftJoin('consultas', 'consultas.id', '=', 'turnos.consulta_id')
+            ->leftJoin('consultas_alternativas', 'consultas_alternativas.id', '=', 'turnos.consulta_alternativa_id')
             ->select('turnos.*')
             ->where('consultas.profesor_id', $profesor->id)
+            ->orWhere('consultas_alternativas.profesor_id', $profesor->id)
             ->orderBy('fecha_hora', 'desc')
             ->paginate(15);
 
@@ -74,7 +78,9 @@ class ProfesorController extends Controller
             'password' => 'required']);
         $data = $request->all();
         $perfil_id = Perfil::where('tag', 'PROFESOR')->pluck('id')->first();
-        $data['perfil_id'] =$perfil_id;
+        $data['perfil_id'] = $perfil_id;
+        $data['email_verificado'] = date('Y-m-d H:i:s');
+        $data['password'] = bcrypt( $data['password']);
         Usuario::create($data);
 
         return redirect()->route('profesores.index')->with('success', 'Registro creado satisfactoriamente');
@@ -147,14 +153,16 @@ class ProfesorController extends Controller
         $desc_selec = "CONCAT(materias.descripcion, ' - ', dias.descripcion, ' a las ', TIME_FORMAT(consultas.hora, '%H:%ihs')) as descripcion";
         $consultas = Consulta::select('consultas.id as id',
             DB::raw($desc_selec), 'consultas.numero_dia as numero_dia')
-        ->where('profesor_id', $profesor->id)
+            ->where('profesor_id', $profesor->id)
             ->join('materias', 'materias.id', '=', 'consultas.materia_id')
             ->join('dias', 'dias.numero', '=', 'consultas.numero_dia')
-
             ->get();
+        $dias_sin_clase = DiaSinClase::all();
+
 
         return view('pages.profesor.consultas.cancelar')
-            ->with(['consultas' => $consultas]);
+            ->with(['consultas' => $consultas,
+                    'dias_sin_clase' => $dias_sin_clase]);
     }
     public function cancelarConsultaFuturas(Request $request)
     {

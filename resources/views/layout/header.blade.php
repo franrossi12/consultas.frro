@@ -6,8 +6,8 @@
 
 
     @if (!Auth::check())
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+    <div class="collapse navbar-collapse" style="display: contents !important;" >
+        <ul class="navbar-nav flex-row ml-md-auto  d-md-flex">
             <li>
                 <a href="{{ route('auth.login') }}"><button class="btn btn-primary btn-block">Inicia sesión o regístrate</button></a>
             </li>
@@ -17,8 +17,8 @@
         <button class="navbar-toogle" type="button"  id="menu-toggle" data-toggle="collapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <div class="collapse navbar-collapse" style="display: contents !important;" id="navbarSupportedContent">
+            <ul class="navbar-nav flex-row ml-md-auto  d-md-flex">
                 <li>
                     <a href="{{ homeRoute() }}">
                         <button class="btn btn-primary btn-block p-2 mr-2">

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Modelos\Carrera;
 use App\Modelos\Consulta;
+use App\Modelos\ConsultaAlternativa;
 use App\Modelos\Materia;
 use App\Modelos\Usuario;
 use App\Modelos\Dia;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 
 class ConsultaController extends Controller
@@ -77,12 +78,7 @@ class ConsultaController extends Controller
         ]);
     }
 
-    public function inscripcionForm()
-    {
-        $materias = Materia::all();
-        $profesores = Usuario::where('perfil_id','3')->get();
-        return view('pages.alumno.consultas.inscripcion.form')->with(['materias' => $materias,'profesores' => $profesores]);
-    }
+
 
     public function index_profesor()
     {
@@ -92,6 +88,7 @@ class ConsultaController extends Controller
 
     public function buscarConsultas(Request $request)
     {
+        $consultas = [];
         $filtros = $request->toArray();
         $query = Consulta::select('consultas.*', 'usuarios.nombre as profesor_nombre',
             'usuarios.apellido as profesor_apellido',
@@ -99,15 +96,28 @@ class ConsultaController extends Controller
             ->join('usuarios', 'usuarios.id', '=', 'consultas.profesor_id')
             ->join('materias', 'materias.id', '=', 'consultas.materia_id');
 
-        // todo falta agregar que merge con consultas alternativas
+
+        $query_al = ConsultaAlternativa::select('consultas_alternativas.materia_id',
+            'consultas_alternativas.profesor_id','consultas_alternativas.id',
+            DB::raw('DATE(fecha_hora) as fecha'),
+            DB::raw('TIME(fecha_hora) as hora'),
+            'usuarios.nombre as profesor_nombre',
+            'usuarios.apellido as profesor_apellido',
+            'materias.descripcion as materia')
+            ->join('usuarios', 'usuarios.id', '=', 'consultas_alternativas.profesor_id')
+            ->join('materias', 'materias.id', '=', 'consultas_alternativas.materia_id');
+
 
         if ($filtros['materia'] != '' && !empty($filtros['materia'])) {
             $query = $query->where('materias.id', $filtros['materia']);
+            $query_al = $query_al->where('materias.id', $filtros['materia']);
         }
         if ($filtros['profesor'] != '' && !empty($filtros['profesor'])) {
             $query->where('usuarios.id', $filtros['profesor']);
+            $query_al = $query_al->where('usuarios.id',$filtros['profesor']);
         }
-        $consultas = $query->get();
+        $consultas['consultas'] = $query->get();
+        $consultas['alternativas'] = $query_al->get();
         return response()->json($consultas);
     }
 }

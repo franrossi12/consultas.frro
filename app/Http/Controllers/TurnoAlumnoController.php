@@ -20,14 +20,25 @@ class TurnoAlumnoController extends Controller
             //busco turno
             $alumno = Auth::user();
             $fecha = Carbon::createFromFormat('d/m/Y', $data['fecha']);
-            $turno = Turno::where('consulta_id', $data['consulta_id'])
-                ->whereDate('fecha_hora', '=', $fecha->format('Y-m-d'))
-                ->first();
+            if ($data['consulta_alternativa']) {
+                $turno = Turno::where('consulta_alternativa_id', $data['consulta_id'])
+                    ->whereDate('fecha_hora', '=', $fecha->format('Y-m-d'))
+                    ->first();
+            } else {
+                $turno = Turno::where('consulta_id', $data['consulta_id'])
+                    ->whereDate('fecha_hora', '=', $fecha->format('Y-m-d'))
+                    ->first();
+            }
+
             // si no existe el turno lo creo
             if (empty($turno)) {
                 $turno = new Turno();
                 $turno->cantidad_alumnos = 0;
-                $turno->consulta_id =  $data['consulta_id'];
+                if ($data['consulta_alternativa']) {
+                    $turno->consulta_alternativa_id =  $data['consulta_id'];
+                } else {
+                    $turno->consulta_id =  $data['consulta_id'];
+                }
                 $turno->fecha_hora = $fecha->format('Y-m-d') . ' ' . $data['hora'];
                 $turno->save();
             }

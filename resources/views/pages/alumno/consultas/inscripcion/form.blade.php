@@ -6,8 +6,8 @@
 
 @section("content")
     <div id="form">
-        <div class="card bg-light-gray row-consultas ">
-            <div class=" row p-md-3 p-lg-3 ml-md-3 mr-md-3 mt-md-3 pt-3 ">
+        <div class="card bg-light-gray row-consultas mt-3 ">
+            <div class=" row p-md-3 p-lg-3 ml-md-3 mr-md-3 p-3 ">
                 {{--            <div class="col-md-6 col-lg-6 col-12 mb-2">--}}
                 {{--                <v-select   v-model="carrera"--}}
                 {{--                            class="style-chooser"--}}
@@ -51,7 +51,7 @@
             <div class="row bg-light-gray p-md-3 p-lg-3 ml-md-3 mr-md-3 mt-md-2 pt-1 row-consultas"
                  v-if="sinConsultas">
                 <div class="col-md-12 col-lg-12 col-12 mb-2">
-                    <h5>No hay consultas disponibles</h3>
+                    <h3>No hay consultas disponibles</h3>
                 </div>
             </div>
         </div>
@@ -117,7 +117,10 @@
           materia: '',
           profesores: @json($profesores),
           profesor: '',
+          diasSinClase: @json($dias_sin_clase),
+          diasSinClaseFormateados: [],
           consultas: [],
+          consultasAlternativas: [],
           fecha: null,
           fechaFormateada: '',
           horarios: [],
@@ -127,6 +130,7 @@
           sinConsultas: false,
           horarioSeleccionado: null,
           consultaSeleccionada: null,
+          consultaAltertiva: false,
           datosVacios: false,
           response: {},
           consultasFechas: [],
@@ -136,28 +140,37 @@
 
         methods: {
           selectFecha(val) {
+            this.consultaAltertiva = false;
             this.fecha = val
             if (this.fecha) {
               this.fechaFormateada = this.fecha.getDate() + '/' + (this.fecha.getMonth() + 1) + '/' + this.fecha.getFullYear();
               this.horarios = this.consultas.filter((c) => {
                 return c.numero_dia == this.fecha.getDay()
               });
+              // si es undefined es porque es una alternativa
+              if (this.horarios.length <= 0) {
+                this.horarios = this.consultasAlternativas.filter((c) => {
+                  var a = new Date(c.fecha);
+                  return (a.getDate() == this.fecha.getDate() && a.getFullYear() == this.fecha.getFullYear()  && a.getMonth() == this.fecha.getMonth())
+                });
+                this.consultaAltertiva = true;
+              }
             }
           },
           selectHorario(consultaID) {
             this.horarioSeleccionado = true;
-            const c = this.consultas.find((c) => {
-              return c.id === consultaID
-            });
+            var c = null;
+            if (!this.consultaAltertiva) {
+              c = this.consultas.find((c) => {
+                return c.id === consultaID
+              });
+            } else {
+              c = this.consultasAlternativas.find((c) => {
+                return c.id === consultaID
+              });
+            }
             this.consultaSeleccionada = c;
           },
-          // getMaterias(){
-          //   axios
-          //     .get(`${this.url}/${this.carrera}`)
-          //     .then(response => {
-          //       this.materias = response.data
-          //     })
-          // },
           clearForm() {
             this.fecha = null;
             this.consultas = [];
@@ -181,11 +194,11 @@
           incripcion() {
             this.consultaExitosa = false;
             this.errorInscripcion = false;
-            Swal.showLoading()
             const data = {
               consulta_id: this.consultaSeleccionada.id,
               fecha: this.fechaFormateada,
-              hora: this.consultaSeleccionada.hora
+              hora: this.consultaSeleccionada.hora,
+              consulta_alternativa: this.consultaAltertiva
             };
             axios
               .post(`${this.urlInscripcion}`, data)
@@ -195,13 +208,13 @@
                     toastr.error(this.response.msg, 'Error al tratar de inscribir', {timeOut: 5000})
                   } else {
                     toastr.success(this.response.msg, ' Inscripción exitosa', {timeOut: 5000})
-                    this.datosVacios = true;
+                    this.mostrarCalendario = false;
                     this.clearForm();
+                    this.profesor = ''
+                    this.materia = ''
                   }
-                  Swal.hideLoading();
                 },
                 (error) => {
-                  Swal.hideLoading();
 
                 })
           },
@@ -223,17 +236,37 @@
               .post(`${this.urlBuscar}`, data)
               .then(response => {
                 this.sinConsultas = response.data.length <= 0;
-                this.consultas = response.data
+                this.consultas = response.data.consultas
                 this.consultasFechas = {
                   days: this.consultas.map((c) => {
                     return c.numero_dia
                   })
                 }
-                console.log(this.consultas)
+                this.consultasAlternativas = response.data.alternativas
               })
-          }
+          },
+          formatearDiasSinClase() {
+            this.diasSinClaseFormateados = [];
+            const self = this
+            $.each(this.diasSinClase, function(key, value){
+              if (value.fecha_desde === value.fecha_hasta || value.fecha_hasta === null) {
+                self.diasSinClaseFormateados.push(new Date(value.fecha_desde))
+              } else {
+                var date1 = new Date(value.fecha_desde);
+                var date2 = new Date(value.fecha_hasta);
+                var diffTime = Math.abs(date2 - date1);
+                var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                for (var i = 0; i <= diffDays; i++) {
+                  var auxDate = new Date(value.fecha_desde);
+                  auxDate.setDate(auxDate.getDate() + i)
+                  self.diasSinClaseFormateados.push(auxDate);
+                }
+              }
+            });
+          },
         },
         mounted() {
+          this.formatearDiasSinClase();
         },
         computed: {
           disabledDates: {
@@ -243,22 +276,29 @@
                 to: new Date(), // Disable all dates up to specific date
                 // from: new Date(2016, 0, 26), // Disable all dates after specific date
                 days: [6, 0], // Disable Saturday's and Sunday's
-                // todo poner dias sin clases
-                // dates: [ // Disable an array of dates
-                //   new Date(2019, 10, 1),
-                //   new Date(2019, 10, 5),
-                //   new Date(2019, 10, 18)
-                // ],
+                dates: self.diasSinClaseFormateados// Disable an array of dates
+                  ,
                 customPredictor: function (date) {
                   // disables the date if it is a multiple of 5
                   if (typeof (self.consultas) != "undefined" && self.consultas.length > 0) {
                     const d = self.consultas.find((c) => {
                       return c.numero_dia == date.getDay()
                     });
-                    if (typeof (d) === "undefined") {
+                    var dateAlt = undefined;
+                    if (typeof (self.consultasAlternativas) != "undefined" && self.consultasAlternativas.length > 0) {
+                      dateAlt = self.consultasAlternativas.find((c) => {
+                        var a = new Date(c.fecha);
+                        return (a.getDate() == date.getDate() && a.getFullYear() == date.getFullYear()  && a.getMonth() == date.getMonth())
+                      });
+                      if (typeof (dateAlt) !== "undefined") {
+                        self.consultasFechas.days.push(date.getDay())
+                      }
+                    }
+                    if (typeof (d) === "undefined" && typeof (dateAlt) === "undefined") {
                       return true
                     }
                   }
+
                 }
               }
             }

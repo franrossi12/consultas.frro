@@ -13,7 +13,7 @@
                 <div class="panel-body">
                     <div class="pull-left"><h3>Lista de Consultas</h3></div>
                     <div class="table-container">
-                        <table id="mytable" class="table table-bordred table-striped text-center">
+                        <table id="mytable" class="table table-bordred table-striped text-center table-responsive">
                             <thead>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Materia</th>
@@ -28,8 +28,8 @@
                             @foreach($consultas as $consulta)
                                 <tr>
                                     <td>{{ $consulta->estado() }}</td>
-                                    <td>{{ $consulta->turno->consulta->materia->descripcion }}</th>
-                                    <td>{{ $consulta->turno->consulta->profesor->getNombreCompleto() }}</td>
+                                    <td>{{ empty($consulta->turno->consulta) ? $consulta->turno->consultaAlternativa->materia->descripcion : $consulta->turno->consulta->materia->descripcion }}</th>
+                                    <td>{{ empty($consulta->turno->consulta) ? $consulta->turno->consultaAlternativa->profesor->getNombreCompleto() : $consulta->turno->consulta->profesor->getNombreCompleto() }}</th>
                                     <td>{{ $consulta->turno->fecha_hora->format('d/m/Y') }}</th>
                                     <td>{{ $consulta->turno->fecha_hora->format('H:i')  }}</th>
                                     <td>{{ $consulta->created_at->format('d/m/Y') }}</td>
