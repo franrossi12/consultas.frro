@@ -162,6 +162,7 @@ class ProfesorController extends Controller
 
             $datos = ['turno' => $turno];
             Mail::send('emails.cancelacion-alumno', $datos, function ($message) use ($alumnos_email) {
+                $message->from('consultasfrro@gmail.com', 'Consultas Frro');
                 $message->to($alumnos_email)
                     ->subject('Consulta Cancelada');
             });

@@ -106,6 +106,7 @@ class RegisterController extends Controller
 //                ->view('emails.confirmation-password')
 //                ->with(['usuario' => $this->usuario]);
             Mail::send('emails.confirmation-password', $datos, function ($message) use ($data) {
+                $message->from('consultasfrro@gmail.com', 'Consultas Frro');
                 $message->to($data['email'])
                     ->subject('Confirmación de Contraseña');
 

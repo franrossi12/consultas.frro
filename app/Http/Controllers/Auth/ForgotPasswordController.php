@@ -50,7 +50,8 @@ class ForgotPasswordController extends Controller
 
             $datos = ['token' => $token->token, 'nombre' => $usuario->nombre];
             Mail::send('emails.forgot-password', $datos, function ($message) use ($usuario) {
-                $message->to($usuario->email)
+                $message->from('consultasfrro@gmail.com', 'Consultas Frro');
+                $message->to('rossifrancisco12@gmail.com')
                     ->subject('Resetear Contraseña');
             });
             return view('pages.auth.login')

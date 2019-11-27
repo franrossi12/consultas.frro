@@ -53,6 +53,15 @@ Route::middleware(['auth:web', 'is.perfil:ADMIN'])->group(function () {
     });
 });
 /* RUTAS ADMIN */
+Route::get('test-email',  function () {
+    $datos = ['usuario' => \App\Modelos\Usuario::first()];
+
+    Mail::send('emails.confirmation-password', $datos, function ($message) {
+        $message->to('rossifrancisco12@gmail.com')
+            ->subject('Confirmación de Contraseña');
+    });
+});
+
 
 /* RUTAS PROFESOR */
 Route::middleware(['auth:web', 'is.perfil:PROFESOR'])->group(function () {
