@@ -8,11 +8,21 @@
 <div class="container">
 
 
-<div class="row">
+<div class="row mt-2">
 {{--    <section class="content">--}}
         <div class="col-md-12">
             <div class="panel panel-rigth mt-2">
                 <div class="panel-body">
+                    @if(Session::has('success'))
+                        <div class="alert alert-info">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
+                    @if(Session::has('error'))
+                        <div class="alert alert-danger mt-2">
+                            {{Session::get('error')}}
+                        </div>
+                    @endif
                     <div class="pull-left"><h3>Lista de dias sin clase</h3></div>
                         <div class="text center">
                             <div class="btn-group">
@@ -22,10 +32,10 @@
                     <div class="table-container">
                         <table id="mytable" class="table table-bordred table-striped table-responsive">
                             <thead>
-                                <th scope="col">#</th>
-                                <th scope="col">motivo</th>
-                                <th scope="col">fecha_desde</th>
-                                <th scope="col">fecha_hasta</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col">Fecha Desde</th>
+                                <th scope="col">Fecha Hasta</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </thead>
@@ -49,7 +59,7 @@
                             @endforeach
                             @else
                                 <tr>
-                                    <td colspan="8">No hay registro !!</td>
+                                    <td colspan="8">No hay dias sin clases registrados.</td>
                                 </tr>
                             @endif
                                 </tbody>

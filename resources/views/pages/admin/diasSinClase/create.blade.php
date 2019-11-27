@@ -6,12 +6,12 @@
 
 
 @section('content')
-<div class="row">
+<div class="row mt-2">
 {{--	<section class="content">--}}
 		<div class="col-md-8 col-md-offset-2">
 			@if (count($errors) > 0)
 			<div class="alert alert-danger">
-				<strong>Error!</strong> Revise los campos obligatorios.<br><br>
+				<strong>Error!</strong> Revise los campos.<br><br>
 				<ul>
 					@foreach ($errors->all() as $error)
 					<li>{{ $error }}</li>
@@ -36,12 +36,12 @@
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="descripcion" id="descripcion" class="form-control input-sm" placeholder="motivo ">
+										<input type="text" name="descripcion" id="descripcion" class="form-control input-sm" placeholder="motivo " required>
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="date" name="fecha_desde" id="fecha_desde" class="form-control input-sm" placeholder="fecha desde ">
+										<input type="date" name="fecha_desde" id="fecha_desde" class="form-control input-sm" placeholder="fecha desde " required>
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">

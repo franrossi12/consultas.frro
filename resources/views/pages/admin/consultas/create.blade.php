@@ -6,12 +6,12 @@
 
 
 @section('content')
-    <div class="row">
+    <div class="row mt-2">
         {{--	<section class="content">--}}
         <div class="col-md-12 col-md-offset-2">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    <strong>Error!</strong> Revise los campos obligatorios.<br><br>
+                    <strong>Error!</strong> Revise los campos.<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -35,50 +35,42 @@
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
-                                    <v-select name="materia_id" id="materia"
-                                              v-model="materia"
-                                              class="style-chooser"
-                                              :options="materias"
-                                              :reduce="p => p.id"
-                                              label="descripcion"
-                                              required
-                                              placeholder="Seleccione Materia">
-                                        <div slot="no-options">No hay opciones aquí</div>
-                                    </v-select>
+                                    <select class="form-control" name="materia_id" id="materia_id" required>
+                                        <option value="" selected hiden>Seleccione Materia</option>
+                                        @foreach($materias as $materia)
+                                            <option value="{{$materia->id}}" @if($materia->id === old('materia_id', '')) selected @endif>
+                                                {{$materia->descripcion}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
-                                    <v-select name="profesor_id" id="profesor_id"
-                                              v-model="profesor"
-                                              class="style-chooser"
-                                              :options="profesores"
-                                              :reduce="p => p.id"
-                                              label="apellido"
-                                              required
-                                              placeholder="Seleccione Profesor">
-                                        <div slot="no-options">No hay opciones aquí</div>
-                                    </v-select>
+                                    <select class="form-control" name="profesor_id" id="profesor_id" required>
+                                        <option value="" selected hiden>Seleccione Profesor</option>
+                                        @foreach($profesores as $profesor)
+                                            <option value="{{$profesor->id}}" @if($profesor->id === old('profesor_id', '')) selected @endif>
+                                                {{$profesor->getNombreCompleto() }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-2">
-                                    <v-select name="numero_dia" id="numero_dia"
-                                              v-model="dia"
-                                              class="style-chooser"
-                                              :options="dias"
-                                              :reduce="d => d.id"
-                                              label="descripcion"
-                                              required
-                                              placeholder="Seleccione un dia">
-                                        <div slot="no-options">No hay opciones aquí</div>
-                                    </v-select>
+                                    <select class="form-control" name="numero_dia" id="numero_dia" required>
+                                        <option value="" selected hiden>Seleccione Día</option>
+                                        @foreach($dias as $dia)
+                                            <option value="{{$dia->id}}" @if($dia->id === old('numero_dia', '')) selected @endif>
+                                                {{$dia->descripcion }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="time" name="hora" id="hora" class="form-control input-sm" required step="2" >
+                                        <input type="time" name="hora" id="hora" class="form-control input-sm" required step="2"
+                                        value="{{old('hora', '')}}">
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="materia_id" :value=" this.materia">
-                            <input type="hidden" name="profesor_id" :value=" this.profesor">
-                            <input type="hidden" name="numero_dia" :value=" this.dia">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <input type="submit"  value="Crear" class="btn btn-success btn-block">
@@ -96,26 +88,4 @@
 
 @endsection
 @section("beforeEndBody")
-
-    <!-- Our View App goes at the end of the document -->
-    <script>
-      new Vue({
-        el: "#form",
-        components: {
-          'v-select': VueSelect.VueSelect
-        },
-        data: {
-          dias: @json($dias),
-          dia: '',
-          materias: @json($materias),
-          materia: '',
-          profesores: @json($profesores),
-          profesor: '',
-        },
-        methods: {
-
-        }
-      })
-    </script>
-
 @endsection

@@ -11,7 +11,6 @@
 |
 */
 
-use App\Mail\CancelacionAlumnoEmail;
 use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {return view('welcome');})->name('welcome');
@@ -30,13 +29,6 @@ Route::get('olvide-contraseña',  function () { return view('pages.auth.forgot')
 Route::post('olvide-contraseña',  'Auth\ForgotPasswordController@send')->name('auth.forgot-submit');
 Route::get('olvide-contraseña/{token}',  'Auth\ForgotPasswordController@form');
 Route::post('resetear-contraseña',  'Auth\ResetPasswordController@resetPassword')->name('auth.reset-submit');
-
-
-//Route::get('test-email', function () {
-//    $turno = \App\Modelos\Turno::first();
-//    Mail::to('rossifrancisco12@gmail.com')
-//        ->send(new CancelacionAlumnoEmail($turno));
-//});
 
 /* RUTAS ADMIN */
 Route::middleware(['auth:web', 'is.perfil:ADMIN'])->group(function () {
@@ -69,7 +61,7 @@ Route::middleware(['auth:web', 'is.perfil:PROFESOR'])->group(function () {
         Route::get('consultas/listado', 'ProfesorController@listadoConsultas')->name('profesor.consultas.listado');
 
         Route::get('perfil', 'PerfilController@index')->name('profesor.perfil');
-        Route::post('perfil', 'ProfesorController@update')->name('profesor.perfil.actualizar');
+        Route::post('perfil', 'ProfesorController@actualizarPerfil')->name('profesor.perfil.actualizar');
         Route::post('cancelar-consultas', 'ProfesorController@cancelarConsulta')->name('profesor.consultas.cancelar');
         Route::get('consultas/cancelar', 'ProfesorController@consultaCancelarIndex')->name('profesor.consultas.cancelar');
         Route::post('consultas/cancelar-futuras', 'ProfesorController@cancelarConsultaFuturas')->name('profesor.consultas.cancelar.futuras');

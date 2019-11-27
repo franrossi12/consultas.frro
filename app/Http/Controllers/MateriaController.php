@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class MateriaController extends Controller
 {
+    protected $messages = [
+        'descripcion.required' => 'El campo :attribute es requerido.',
+        'carrera_id.required' => "La carrera es requerida"
+    ];
     public function index()
     {
         $materias = Materia::orderBy('id', 'DESC')->paginate(12);
@@ -24,7 +28,7 @@ class MateriaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['descripcion' => 'required',
-            'carrera_id' => 'required']);
+            'carrera_id' => 'required'], $this->messages);
         Materia::create($request->all());
 
         return redirect()->route('materias.index')->with('success', 'Registro creado satisfactoriamente');
@@ -40,7 +44,7 @@ class MateriaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, ['descripcion' => 'required',
-            'carrera_id' => 'required']);
+            'carrera_id' => 'required'], $this->messages);
         Materia::find($id)->update($request->all());
 
         return redirect()->route('materias.index')->with('success', 'Registro actualizado satisfactoriamente');

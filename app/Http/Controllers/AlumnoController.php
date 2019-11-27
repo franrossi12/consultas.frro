@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class AlumnoController extends Controller
 {
+    protected $messages = [
+        'nombre.required' => 'El campo nombre es requerido.',
+        'apellido.required' => 'El campo apellido es requerido.',
+        'email.required' => 'El campo email es requerido.',
+        'email.unique' => "El email ya se encuentra en el sistema.",
+    ];
     public function home() {
         $alumno = Auth::user();
         $consultas = TurnoAlumno::where('alumno_id',$alumno->id)
@@ -63,7 +69,7 @@ class AlumnoController extends Controller
     {
         $this->validate($request, ['nombre'     => 'required',
                                     'apellido'  => 'required',
-                                    'email'     => 'required']);
+                                    'email'     => 'required'], $this->messages);
         $usuario = Auth::user();
         $usuario->nombre = $request->get('nombre');
         $usuario->apellido = $request->get('apellido');

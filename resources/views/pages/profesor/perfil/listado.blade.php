@@ -28,13 +28,15 @@
                     <div class="row">
                         <div class="col-12">
                             <label><b>Nombre:</b></label>
-                            <input type="text" class="form-control" name="nombre" value="{{ $perfiles->nombre }}">
+                            <input type="text" class="form-control" name="nombre"
+                                   value="{{ $perfiles->nombre }}" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <label><b>Apellido:</b></label>
-                            <input type="text" class="form-control" name="apellido" value="{{ $perfiles->apellido }}">
+                            <input type="text" class="form-control" name="apellido"
+                                   value="{{ $perfiles->apellido }}" required>
                         </div>
                     </div>
 
@@ -42,7 +44,8 @@
                         <div class="col-12">
 
                             <label><b>Email:</b></label>
-                            <input type="text" class="form-control" name="email" value="{{ $perfiles->email }}">
+                            <input type="text" class="form-control" name="email"
+                                   value="{{ $perfiles->email }}" required>
                         </div>
                     </div>
                     <div class="col-12 mt-3 mb-2">

@@ -101,7 +101,16 @@ class RegisterController extends Controller
                 'perfil_id'         => $perfil_alumno->id,
                 'token_verificar'   => Str::random(32)
             ]);
-            Mail::to($data['email'])->send(new ConfirmarPasswordEmail($user));
+            $datos = ['usuario' => $user];
+//            $this->subject('')
+//                ->view('emails.confirmation-password')
+//                ->with(['usuario' => $this->usuario]);
+            Mail::send('emails.confirmation-password', $datos, function ($message) use ($data) {
+                $message->to($data['email'])
+                    ->subject('Confirmación de Contraseña');
+
+            });
+//            Mail::to($data['email'])->send(new ConfirmarPasswordEmail($user));
         }
         return view('pages.auth.login')->with(['message'=>'Debe verificar su mail. Se ha enviado a su casilla de correo el código de confirmación']);
 

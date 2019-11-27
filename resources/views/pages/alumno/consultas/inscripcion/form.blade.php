@@ -275,7 +275,7 @@
               return {
                 to: new Date(), // Disable all dates up to specific date
                 // from: new Date(2016, 0, 26), // Disable all dates after specific date
-                days: [6, 0], // Disable Saturday's and Sunday's
+                days: [0], // Disable Saturday's and Sunday's
                 dates: self.diasSinClaseFormateados// Disable an array of dates
                   ,
                 customPredictor: function (date) {

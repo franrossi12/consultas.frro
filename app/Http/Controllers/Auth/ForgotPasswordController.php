@@ -46,7 +46,13 @@ class ForgotPasswordController extends Controller
         $usuario = Usuario::where('email', $request->get('email'))->first();
         if (!empty($usuario)) {
             $token = PasswordReset::create(['email' => $usuario->email, 'token' => Str::random(32)]);
-            Mail::to($usuario->email)->send(new OlvideContraseñaMail($usuario->nombre, $token->token));
+//            Mail::to($usuario->email)->send(new OlvideContraseñaMail($usuario->nombre, $token->token));
+
+            $datos = ['token' => $token->token, 'nombre' => $usuario->nombre];
+            Mail::send('emails.forgot-password', $datos, function ($message) use ($usuario) {
+                $message->to($usuario->email)
+                    ->subject('Resetear Contraseña');
+            });
             return view('pages.auth.login')
                 ->with(['message'=>'Se ha enviado a su casilla de correo el código para resetar su contraseña.']);
         } else {

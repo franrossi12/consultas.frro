@@ -33,10 +33,10 @@
                     <div class="table-container">
                         <table id="mytable" class="table table-bordred table-striped table-responsive">
                             <thead>
-                                <th scope="col">#</th>
-                                <th scope="col">nombre</th>
-                                <th scope="col">apellido</th>
-                                <th scope="col">email</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Email</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </thead>
@@ -62,7 +62,7 @@
                             @endforeach
                             @else
                                 <tr>
-                                    <td colspan="8">No hay registro !!</td>
+                                    <td colspan="8">No hay profesores registrados.</td>
                                 </tr>
                             @endif
                                 </tbody>

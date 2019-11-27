@@ -6,6 +6,7 @@ use App\Modelos\Carrera;
 use App\Modelos\Consulta;
 use App\Modelos\ConsultaAlternativa;
 use App\Modelos\Materia;
+use App\Modelos\Turno;
 use App\Modelos\Usuario;
 use App\Modelos\Dia;
 use Illuminate\Http\Request;
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class ConsultaController extends Controller
 {
+    protected $messages = [
+        'materia_id.required' => 'La materia es requerida.',
+        'profesor_id.required' => 'El profesor es requerido.',
+        'numero_dia.required' => 'El día es requerido.',
+        'hora.required' => 'La hora es requerida.'
+    ];
     public function index()
     {
         $consultas = Consulta::orderBy('id', 'DESC')->paginate(12);
@@ -35,7 +42,7 @@ class ConsultaController extends Controller
         $this->validate($request, ['materia_id' => 'required',
             'profesor_id' => 'required',
             'numero_dia' => 'required',
-            'hora' => 'required']);
+            'hora' => 'required'], $this->messages);
         Consulta::create($request->all());
 
         return redirect()->route('consultas.index')->with('success', 'Registro creado satisfactoriamente');
@@ -46,7 +53,7 @@ class ConsultaController extends Controller
         $this->validate($request,[  'materia_id' => 'required',
                                     'profesor_id' => 'required',
                                     'numero_dia' => 'required',
-                                    'hora' => 'required']);
+                                    'hora' => 'required'], $this->messages);
         Consulta::find($id)->update($request->all());
 
 
@@ -61,8 +68,14 @@ class ConsultaController extends Controller
 
     public function destroy($id)
     {
-        Materia::find($id)->delete();
-        return redirect()->route('consultas.index')->with('success', 'Registro eliminado satisfactoriamente');
+        $turnos = Turno::where('consulta_id', $id)->get();
+        if (count($turnos) <= 0) {
+            Consulta::find($id)->delete();
+            return redirect()->route('consultas.index')->with('success', 'Registro eliminado satisfactoriamente');
+        } else {
+            return redirect()->route('consultas.index')
+                ->with('error', 'La consulta no se puede eliminar, posee turnos asociados');
+        }
     }
     public function edit($id){
         $consulta= Consulta::find($id);

@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Mail;
 
 class ProfesorController extends Controller
 {
+    protected $messages = [
+            'required' => 'El campo :attribute es requerido.',
+            'email.unique' => "El email ya se encuentra en el sistema.",
+            'password.min'  => "La contraseña debe contener al menos 8 caracteres.",
+
+    ];
     public function home()
     {
         $profesor = Auth::user();
@@ -72,10 +78,10 @@ class ProfesorController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'email' => 'required',
-            'password' => 'required']);
+            'nombre'    => 'required',
+            'apellido'  => 'required',
+            'email'     => ['required', 'email', 'unique:usuarios'],
+            'password'  => ['required', 'min:8']], $this->messages);
         $data = $request->all();
         $perfil_id = Perfil::where('tag', 'PROFESOR')->pluck('id')->first();
         $data['perfil_id'] = $perfil_id;
@@ -96,7 +102,7 @@ class ProfesorController extends Controller
     {
         $this->validate($request, ['nombre' => 'required',
             'apellido' => 'required',
-            'email' => 'required']);
+            'email' => 'required', $this->messages]);
         $usuario = Usuario::where('id', $id)->first();
         $usuario->nombre = $request->get('nombre');
         $usuario->apellido = $request->get('apellido');
@@ -106,6 +112,22 @@ class ProfesorController extends Controller
         return redirect()->route('profesores.index')
             ->with('success', 'Profesor actualizado satisfactoriamente');
 
+    }
+    public function actualizarPerfil(Request $request)
+    {
+        $this->validate($request,
+            ['nombre'     => 'required',
+            'apellido'  => 'required',
+            'email'     => ['required']], $this->messages);
+
+        $usuario = Auth::user();
+        $usuario->nombre = $request->get('nombre');
+        $usuario->apellido = $request->get('apellido');
+        $usuario->email = $request->get('email');
+        $usuario->save();
+
+        return redirect()->route('profesor.perfil')
+            ->with('success', 'Perfil actualizado correctamente.');
     }
 
     public function destroy($id)
@@ -136,7 +158,13 @@ class ProfesorController extends Controller
             }
             $turno->save();
             // envio mail a alumnos, pasar a job y cron
-            Mail::to($alumnos_email)->send(new CancelacionAlumnoEmail($turno));
+//            Mail::to($alumnos_email)->send(new CancelacionAlumnoEmail($turno));
+
+            $datos = ['turno' => $turno];
+            Mail::send('emails.cancelacion-alumno', $datos, function ($message) use ($alumnos_email) {
+                $message->to($alumnos_email)
+                    ->subject('Consulta Cancelada');
+            });
             DB::commit();
             $response['msg'] = 'Turno cancelado con éxito. Los alumnos fueron notificados.';
         } catch (\Exception $e) {
