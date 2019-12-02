@@ -6,13 +6,13 @@
 
 
     @if (!Auth::check())
-    <div class="collapse navbar-collapse" style="display: contents !important;" >
-        <ul class="navbar-nav flex-row ml-md-auto  d-md-flex">
-            <li>
-                <a href="{{ route('auth.login') }}"><button class="btn btn-primary btn-block">Inicia sesión o regístrate</button></a>
-            </li>
-        </ul>
-    </div>
+        <div class="collapse navbar-collapse" style="display: contents !important;" >
+            <ul class="navbar-nav flex-row ml-md-auto  d-md-flex">
+                <li>
+                    <a href="{{ route('auth.login') }}" class="btn btn-primary btn-block">Inicia sesión o regístrate</a>
+                </li>
+            </ul>
+        </div>
     @else
         <button class="navbar-toogle" type="button"  id="menu-toggle" data-toggle="collapse">
             <span class="navbar-toggler-icon"></span>

@@ -62,10 +62,9 @@
                                         {{ __('Iniciar sesión') }}
                                     </button>
                                     <br>
-                                    <a href="{{ route('auth.register') }}">
-                                        <button type="button" class="btn btn-secondary btn-block">
+                                    <a href="{{ route('auth.register') }}" class="btn btn-secondary btn-block">
                                         {{ __('Regístrate') }}
-                                    </button></a>
+                                    </a>
 
                                     <a class="btn btn-link" href="{{ route('auth.forgot') }}">
                                         {{ __('Olvidaste tu Contraseña?') }}

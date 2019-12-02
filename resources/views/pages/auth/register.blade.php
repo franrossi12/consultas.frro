@@ -30,7 +30,7 @@
 
                                 <div class="col-md-12">
                                     <label for="apellido" class="col-form-label text-md-right">{{ __('Apellido') }}</label>
-                                    <input id="apellido" type="text" class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" value="{{ old('apellido') }}" required autofocus>
+                                    <input id="apellido" type="text" class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" value="{{ old('apellido') }}" required >
 
                                     @if($errors->has('apellido'))
                                         <span class="invalid-feedback">
