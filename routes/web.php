@@ -31,6 +31,10 @@ Route::post('olvide-contraseña',  'Auth\ForgotPasswordController@send')->name('
 Route::get('olvide-contraseña/{token}',  'Auth\ForgotPasswordController@form');
 Route::post('resetear-contraseña',  'Auth\ResetPasswordController@resetPassword')->name('auth.reset-submit');
 
+Route::get('contact-soporte', function () { return view('pages.admin.soporte');})->name('soporte.index');
+
+Route::post('contact-soporte',  'AdminController@soporteStore')->name('soporte.store');
+
 /* RUTAS ADMIN */
 Route::middleware(['auth:web', 'is.perfil:ADMIN'])->group(function () {
     Route::prefix('admin')->group(function () {
