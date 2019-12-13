@@ -8,6 +8,10 @@
                     <p>   Universidad Tecnológica Nacional</p>
                     <p>   CONTACTOS: ZEBALLOS 1341 - S2000BQA - ROSARIO</p>
                     <p>   0341 - 4481871   Teléfonos directos e Internos </p>
+                    @if (!Auth::check())
+                    @else
+                    <a href="{{ mapsiteRoute() }}">Mapa del Sitio</a>
+                    @endif
                 </div>
             </div>
         </div>

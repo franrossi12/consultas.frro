@@ -42,6 +42,29 @@ function homeRoute() {
     }
 }
 
+function mapsiteRoute() {
+    $u = currentUser();
+
+    if (!empty($u)) {
+        switch ($u->perfil->tag) {
+            case 'ADMIN':
+                return route('admin.mapsite');
+                break;
+            case 'ALUMNO':
+                return route('alumno.mapsite');
+                break;
+            case 'PROFESOR':
+                return route('profesor.mapsite');
+                break;
+        }
+    }
+}
+
+
+
+
+
+
 function getNumeroDia($numero) {
     $n = Dia::where('numero', $numero)->first();
     return $n->descripcion;
