@@ -157,6 +157,12 @@ class ProfesorController extends Controller
                 $turno_alumno->save();
             }
             $turno->save();
+            $a = new TurnoCancelado();
+            $a->consulta_id =  $turno->consulta->id;
+            $a->fecha_hora = $turno->fecha_hora;
+            $a->motivo = "sin motivo";
+            $a->consulta_alternativa_id = null;
+            $a->save();
             // envio mail a alumnos, pasar a job y cron
 //            Mail::to($alumnos_email)->send(new CancelacionAlumnoEmail($turno));
 
@@ -223,6 +229,7 @@ class ProfesorController extends Controller
                 $a->fecha_hora = $fecha_y_hora_can;
                 $a->motivo = $data['motivo'];
                 $a->consulta_alternativa_id = $alt->id;
+                $a->save();
                 DB::commit();
                 $response['msg'] = "Cancelacion de turno exitosa";
             } else {

@@ -7,8 +7,10 @@ use App\Modelos\Consulta;
 use App\Modelos\ConsultaAlternativa;
 use App\Modelos\Materia;
 use App\Modelos\Turno;
+use App\Modelos\TurnoCancelado;
 use App\Modelos\Usuario;
 use App\Modelos\Dia;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -109,6 +111,14 @@ class ConsultaController extends Controller
             ->join('usuarios', 'usuarios.id', '=', 'consultas.profesor_id')
             ->join('materias', 'materias.id', '=', 'consultas.materia_id');
 
+        $cancelados = TurnoCancelado::select(
+            'turnos_cancelados.consulta_id',
+            'turnos_cancelados.fecha_hora')
+            ->join('consultas', 'consultas.id', '=', 'turnos_cancelados.consulta_id')
+            ->join('usuarios', 'usuarios.id', '=', 'consultas.profesor_id')
+            ->join('materias', 'materias.id', '=', 'consultas.materia_id')
+            ->whereDate('fecha_hora', '>', Carbon::today()->format('Y-m-d'));
+
 
         $query_al = ConsultaAlternativa::select('consultas_alternativas.materia_id',
             'consultas_alternativas.profesor_id','consultas_alternativas.id',
@@ -124,11 +134,14 @@ class ConsultaController extends Controller
         if ($filtros['materia'] != '' && !empty($filtros['materia'])) {
             $query = $query->where('materias.id', $filtros['materia']);
             $query_al = $query_al->where('materias.id', $filtros['materia']);
+            $cancelados = $cancelados->where('materias.id', $filtros['materia']);
         }
         if ($filtros['profesor'] != '' && !empty($filtros['profesor'])) {
             $query->where('usuarios.id', $filtros['profesor']);
             $query_al = $query_al->where('usuarios.id',$filtros['profesor']);
+            $cancelados = $cancelados->where('usuarios.id', $filtros['profesor']);
         }
+        $consultas['canceladas'] = $cancelados->get();
         $consultas['consultas'] = $query->get();
         $consultas['alternativas'] = $query_al->get();
         return response()->json($consultas);

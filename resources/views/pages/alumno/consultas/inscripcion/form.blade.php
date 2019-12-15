@@ -72,8 +72,10 @@
                     <ul class="list-group">
                         <li class="list-group-item list-horario p-3 text-center"
                             v-for="(horario, index) in horarios"
-                            v-on:click="selectHorario(horario.id)">
+                            v-bind:class="getClassHorario(horario.hora, horario.id)"
+                            v-on:click="selectHorario(horario.id, checkHorario(horario.hora, horario.id))">
                             @{{ horario.hora }}
+                            <b v-if="!checkHorario(horario.hora, horario.id)">(Cancelado)</b>
                         </li>
                     </ul>
                 </div>
@@ -85,7 +87,6 @@
                     </span><br>
                         <span><b>Fecha:</b> @{{ this.fechaFormateada }}</span><br>
                         <span><b>Hora:</b> @{{ this.consultaSeleccionada.hora }}</span><br>
-
                     </div>
                 </div>
                 <div class="offset-md-3 offset-lg-3 col-md-6 col-lg-6 col-12 mb-2">
@@ -119,6 +120,7 @@
           profesor: '',
           diasSinClase: @json($dias_sin_clase),
           diasSinClaseFormateados: [],
+          turnosCancelados: [],
           consultas: [],
           consultasAlternativas: [],
           fecha: null,
@@ -157,7 +159,10 @@
               }
             }
           },
-          selectHorario(consultaID) {
+          selectHorario(consultaID, cancelado) {
+              if (!cancelado) {
+                  return false;
+              }
             this.horarioSeleccionado = true;
             var c = null;
             if (!this.consultaAltertiva) {
@@ -171,11 +176,31 @@
             }
             this.consultaSeleccionada = c;
           },
+            checkHorario(hora, consulta_id) {
+              debugger
+                if (this.turnosCancelados.length > 0) {
+                    // busco consulta del turno
+                    const turnoConsulta = this.turnosCancelados.find((tc) => {
+                        var fechaF = this.fecha.getFullYear() + '-' + (this.fecha.getMonth() + 1) + '-' +this.fecha.getDate() ;
+                        return (tc.consulta_id === consulta_id &&
+                            tc.fecha_hora === (fechaF + ' '+ hora))
+                    });
+                    return (typeof (turnoConsulta) == "undefined");
+                }
+                return true;
+            },
+            getClassHorario(hora, consulta_id){
+                return {
+                    '': this.checkHorario(hora,consulta_id),
+                    'li-cancelado': !this.checkHorario(hora,consulta_id)
+                }
+            },
           clearForm() {
             this.fecha = null;
             this.consultas = [];
             this.horarioSeleccionado = false;
             this.horarios = [];
+            this.turnosCancelados = [];
           },
           inscripcionConfirmar() {
             Swal.fire({
@@ -236,7 +261,8 @@
               .post(`${this.urlBuscar}`, data)
               .then(response => {
                 this.sinConsultas = response.data.length <= 0;
-                this.consultas = response.data.consultas
+                this.consultas = response.data.consultas;
+                this.turnosCancelados = response.data.canceladas;
                 this.consultasFechas = {
                   days: this.consultas.map((c) => {
                     return c.numero_dia
@@ -294,6 +320,7 @@
                         self.consultasFechas.days.push(date.getDay())
                       }
                     }
+                    // todo poner canceladas
                     if (typeof (d) === "undefined" && typeof (dateAlt) === "undefined") {
                       return true
                     }
@@ -318,6 +345,14 @@
         .style-chooser .vs__clear,
         .style-chooser .vs__open-indicator {
             fill: grey;
+        }
+        .li-cancelado {
+            background-color: red;
+            color: white;
+        }
+        .li-cancelado:hover {
+            background-color: red;
+            color: white;
         }
     </style>
 
