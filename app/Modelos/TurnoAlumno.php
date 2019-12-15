@@ -43,4 +43,8 @@ class TurnoAlumno extends Model
         return (($this->turno->fecha_hora->diffInDays(Carbon::now()) >= 2) && ($this->estado() === 'Futuras'));
 
     }
+    public function puedeImprimir() {
+        return (($this->estado() === 'Futuras'));
+
+    }
 }

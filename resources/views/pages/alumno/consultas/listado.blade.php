@@ -35,12 +35,19 @@
                                     <td>{{ $consulta->created_at->format('d/m/Y') }}</td>
 
                                     <td>
-                                        @if($consulta->puedeCancelar())
-                                        <button class="btn btn-danger btn-xs"
-                                                type="submit" v-on:click="cancelarConfirmar({{$consulta->id}})">
-                                            <span class="fa fa-trash"></span>
-                                        </button>
+                                        @if($consulta->puedeImprimir())
+                                            <a class="btn btn-info btn-xs"  href="{{route('turno.imprimir', $consulta->id)}}">
+                                                <span class="fa fa-print text-white"></span>
+
+                                            </a>
                                          @endif
+                                            @if($consulta->puedeCancelar())
+                                                <button class="btn btn-danger btn-xs"
+                                                        type="submit" v-on:click="cancelarConfirmar({{$consulta->id}})">
+                                                    <span class="fa fa-trash"></span>
+                                                </button>
+                                            @endif
+
                                     </td>
                                 </tr>
                             @endforeach

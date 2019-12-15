@@ -93,6 +93,14 @@
         .collapse:not(.show) {
         }
     }
+    @media (max-width: 768px) {
+
+        #navbarSupportedContent .navbar-nav{
+            position: relative;
+            margin: 0 auto;
+        }
+    }
+
     .home-container {
         background-image: url('../img/fondo.png');
         background-size: cover;

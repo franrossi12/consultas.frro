@@ -66,6 +66,12 @@ Route::get('test-email',  function () {
             ->subject('Confirmación de Contraseña');
     });
 });
+Route::get('test-imprimir',  function () {
+    $datos = ['turno_a' => \App\Modelos\TurnoAlumno::first()];
+
+    return view('emails.certificado-alumno')->with($datos);
+});
+
 
 
 /* RUTAS PROFESOR */
@@ -73,7 +79,7 @@ Route::middleware(['auth:web', 'is.perfil:PROFESOR'])->group(function () {
     Route::prefix('profesor')->group(function () {
         Route::get('home', 'ProfesorController@home')->name('profesor.home');
         Route::get('consultas/listado', 'ProfesorController@listadoConsultas')->name('profesor.consultas.listado');
-        
+
         Route::get('perfil', 'PerfilController@index')->name('profesor.perfil');
         Route::post('perfil', 'ProfesorController@actualizarPerfil')->name('profesor.perfil.actualizar');
         Route::post('cancelar-consultas', 'ProfesorController@cancelarConsulta')->name('profesor.consultas.cancelar');
@@ -97,6 +103,7 @@ Route::middleware(['auth:web', 'is.perfil:ALUMNO'])->group(function () {
         Route::get('consultas/listado', 'AlumnoController@listadoConsultas')->name('alumno.consultas.listado');
 
         Route::post('turnos-alumnos', 'TurnoAlumnoController@store')->name('alumno.turno.inscripcion');
+        Route::get('turnos-alumnos-imprimir/{id}', 'TurnoAlumnoController@imprimirCertificado')->name('turno.imprimir');
 
         Route::get('materias/{id_carrera}', 'MateriaController@getByCarrera')->name('materias.get-por-carrera');
         Route::post('buscar-consultas', 'ConsultaController@buscarConsultas')->name('alumno.consultas.buscar');

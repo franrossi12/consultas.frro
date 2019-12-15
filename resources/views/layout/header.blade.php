@@ -19,6 +19,11 @@
         </button>
         <div class="collapse navbar-collapse" style="display: contents !important;" id="navbarSupportedContent">
             <ul class="navbar-nav flex-row ml-md-auto  d-md-flex">
+                <li class=" mt-2">
+                    <span style="border: 2px solid; border-radius: 0.5em; border-color: white; color: white;" class="p-2 mr-2">
+                        {{ Auth::user()->getNombreCompleto() }}
+                    </span>
+                </li>
                 <li>
                     <a href="{{ homeRoute() }}">
                         <button class="btn btn-primary btn-block p-2 mr-2">

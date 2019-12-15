@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Modelos\Turno;
 use App\Modelos\TurnoAlumno;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,6 +69,10 @@ class TurnoAlumnoController extends Controller
 
 
         return response()->json($response);
-
+    }
+    public function imprimirCertificado($id) {
+        $turno_alumno = TurnoAlumno::where('id', $id)->first();
+        $pdf = PDF::loadView('emails.certificado-alumno', ['turno_a' => $turno_alumno]);
+        return $pdf->download('certificado.pdf');
     }
 }

@@ -91,7 +91,7 @@ class RegisterController extends Controller
         $validation = $this->validator($data);
         $perfil_alumno = Perfil::where('tag', 'ALUMNO')->first();
         if ($validation->fails())  {
-            return redirect()->back()->with(['errors' => $validation->errors()]);
+            return redirect()->back()->with(['errors' => $validation->errors()])->withInput();
         } else {
             $user = Usuario::create([
                 'nombre'            => $data['nombre'],

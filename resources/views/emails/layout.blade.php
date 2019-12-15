@@ -19,7 +19,7 @@
     <!--[if !mso]><!-->
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700|Ubuntu:400,400i,500,500i,700,700i" rel="stylesheet" />
     <!--<![endif]-->
-    <title>ATM Seguros</title>
+    <title>Consultas FRRo</title>
     <!--[if gte mso 9]>
     <style type="text/css" media="all">
         sup { font-size: 100% !important; }
